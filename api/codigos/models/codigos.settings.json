@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "codigos",
+  "info": {
+    "name": "Codigos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "codigo": {
+      "type": "uid"
+    },
+    "usado": {
+      "type": "boolean"
+    },
+    "usuarioPropietario": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "codigos"
+    },
+    "usuarioReferido": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "codigoReferido"
+    }
+  }
+}

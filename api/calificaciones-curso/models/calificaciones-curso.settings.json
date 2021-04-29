@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cursos-usuario",
+  "info": {
+    "name": "CursosUsuario",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "calificacion": {
+      "type": "decimal"
+    },
+    "comentarios": {
+      "collection": "curso-comentarios",
+      "via": "cursos_usuario"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "cursos_usuarios"
+    },
+    "curso": {
+      "model": "cursos",
+      "via": "cursos_usuarios"
+    }
+  }
+}

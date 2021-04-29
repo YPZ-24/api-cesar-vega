@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comentarios",
+  "info": {
+    "name": "Comentarios",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "comentario": {
+      "type": "text"
+    },
+    "cursos_usuario": {
+      "via": "comentarios",
+      "model": "calificaciones-curso"
+    }
+  }
+}

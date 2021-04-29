@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos_usuarios",
+  "info": {
+    "name": "VideosUsuario"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "visto": {
+      "type": "boolean"
+    },
+    "usuario": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "videos_usuarios"
+    },
+    "video": {
+      "model": "videos",
+      "via": "videos_usuarios"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/contratacions",
+      "handler": "contratacion.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/contratacions/count",
+      "handler": "contratacion.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/contratacions/:id",
+      "handler": "contratacion.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/contratacions",
+      "handler": "contratacion.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/contratacions/:id",
+      "handler": "contratacion.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/contratacions/:id",
+      "handler": "contratacion.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

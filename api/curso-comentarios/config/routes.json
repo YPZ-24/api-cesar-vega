@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/curso-comentarios",
+      "handler": "curso-comentarios.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/curso-comentarios/count",
+      "handler": "curso-comentarios.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/curso-comentarios/:id",
+      "handler": "curso-comentarios.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/curso-comentarios",
+      "handler": "curso-comentarios.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/curso-comentarios/:id",
+      "handler": "curso-comentarios.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/curso-comentarios/:id",
+      "handler": "curso-comentarios.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

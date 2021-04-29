@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seguros",
+  "info": {
+    "name": "Seguros",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "imagen": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contrataciones",
+  "info": {
+    "name": "Contrataciones",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "usuario": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "contrataciones"
+    },
+    "asunto": {
+      "type": "string"
+    }
+  }
+}

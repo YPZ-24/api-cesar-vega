@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "citas",
+  "info": {
+    "name": "Citas",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "fecha": {
+      "type": "datetime"
+    },
+    "pagada": {
+      "type": "boolean"
+    },
+    "asunto": {
+      "type": "string"
+    },
+    "usuario": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "citas"
+    }
+  }
+}

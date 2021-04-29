@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cursos",
+  "info": {
+    "name": "Cursos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "imagen": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "videos": {
+      "collection": "videos",
+      "via": "curso"
+    },
+    "cursos_usuarios": {
+      "via": "curso",
+      "collection": "calificaciones-curso"
+    }
+  }
+}

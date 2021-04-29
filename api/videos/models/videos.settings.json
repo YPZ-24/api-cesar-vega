@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos",
+  "info": {
+    "name": "Videos",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "descripcion": {
+      "type": "text"
+    },
+    "video": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "curso": {
+      "via": "videos",
+      "model": "cursos"
+    },
+    "precio": {
+      "type": "decimal"
+    },
+    "videos_usuarios": {
+      "via": "video",
+      "collection": "videos-usuario"
+    }
+  }
+}

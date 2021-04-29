@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "inversiones",
+  "info": {
+    "name": "Inversiones"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nombre": {
+      "type": "string"
+    },
+    "imagen": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "descripcion": {
+      "type": "text"
+    }
+  }
+}

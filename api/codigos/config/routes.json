@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/codigos",
+      "handler": "codigos.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codigos/count",
+      "handler": "codigos.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/codigos/:id",
+      "handler": "codigos.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/codigos",
+      "handler": "codigos.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/codigos/:id",
+      "handler": "codigos.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/codigos/:id",
+      "handler": "codigos.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

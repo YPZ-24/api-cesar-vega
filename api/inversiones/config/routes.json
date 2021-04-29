@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/inversiones",
+      "handler": "inversiones.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/inversiones/count",
+      "handler": "inversiones.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/inversiones/:id",
+      "handler": "inversiones.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/inversiones",
+      "handler": "inversiones.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/inversiones/:id",
+      "handler": "inversiones.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/inversiones/:id",
+      "handler": "inversiones.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

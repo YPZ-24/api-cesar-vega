@@ -1,0 +1,99 @@
+{
+  "kind": "collectionType",
+  "collectionName": "users-permissions_user",
+  "info": {
+    "name": "user",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false,
+    "timestamps": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string",
+      "minLength": 3,
+      "unique": true,
+      "configurable": false,
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "minLength": 6,
+      "configurable": false,
+      "required": true
+    },
+    "provider": {
+      "type": "string",
+      "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "minLength": 6,
+      "configurable": false,
+      "private": true
+    },
+    "resetPasswordToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "confirmationToken": {
+      "type": "string",
+      "configurable": false,
+      "private": true
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": false,
+      "configurable": false
+    },
+    "role": {
+      "model": "role",
+      "via": "users",
+      "plugin": "users-permissions",
+      "configurable": false
+    },
+    "edad": {
+      "type": "integer"
+    },
+    "fechaNacimiento": {
+      "type": "date"
+    },
+    "telefono": {
+      "type": "integer"
+    },
+    "saldo": {
+      "type": "decimal"
+    },
+    "codigos": {
+      "via": "usuarioPropietario",
+      "collection": "codigos"
+    },
+    "codigoReferido": {
+      "via": "usuarioReferido",
+      "model": "codigos"
+    },
+    "citas": {
+      "via": "usuario",
+      "collection": "citas"
+    },
+    "contrataciones": {
+      "via": "usuario",
+      "collection": "contratacion"
+    },
+    "videos_usuarios": {
+      "via": "usuario",
+      "collection": "videos-usuario"
+    },
+    "cursos_usuarios": {
+      "via": "user",
+      "collection": "calificaciones-curso"
+    }
+  }
+}
