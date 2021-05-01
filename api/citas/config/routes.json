@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/citas/calendar/busy/:timeMin/:timeMax",
+      "handler": "citas.findBusy",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
