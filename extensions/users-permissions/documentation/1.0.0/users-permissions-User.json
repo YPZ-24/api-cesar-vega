@@ -1342,13 +1342,22 @@
                 "fecha": {
                   "type": "string"
                 },
-                "pagada": {
-                  "type": "boolean"
-                },
                 "asunto": {
                   "type": "string"
                 },
                 "usuario": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "CREADA",
+                    "PAGADA",
+                    "REGISTRADA",
+                    "ENVIADA"
+                  ]
+                },
+                "enlace": {
                   "type": "string"
                 },
                 "published_at": {

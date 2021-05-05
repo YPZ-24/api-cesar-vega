@@ -14,9 +14,6 @@
     "fecha": {
       "type": "datetime"
     },
-    "pagada": {
-      "type": "boolean"
-    },
     "asunto": {
       "type": "string"
     },
@@ -24,6 +21,19 @@
       "plugin": "users-permissions",
       "model": "user",
       "via": "citas"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "CREADA",
+        "PAGADA",
+        "REGISTRADA",
+        "ENVIADA"
+      ],
+      "default": "CREADA"
+    },
+    "enlace": {
+      "type": "string"
     }
   }
 }

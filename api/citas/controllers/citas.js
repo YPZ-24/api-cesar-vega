@@ -1,42 +1,66 @@
-const {google} = require('googleapis');
-const {OAuth2} = google.auth
+const {getGoogleCalendar, getBusyHours, createEvent} = require('../../../util/calendar')
 
 module.exports = {
 
-  async findBusy(ctx) {
+    async findBusy(ctx) {
+        
+        const { timeMin, timeMax } = ctx.params;
+        const startDatetime = new Date(timeMin)
+        const endDatetime = new Date(timeMax)
+        if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
+        
+        let response = [];
+        try{
+            const calendar = await getGoogleCalendar();
+            const busyHours = await getBusyHours(calendar, startDatetime, endDatetime)
+            response = {"busyHours": busyHours}
+        }catch(error){
+            console.log(error)
+            return ctx.serverUnavailable('Error al conectar con Google Calendar');
+        }
+        
+        return response
+    },
 
-    const { timeMin, timeMax } = ctx.params;
-    const startDatetime = new Date(timeMin)
-    const endDatetime = new Date(timeMax)
-    if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
+    async updateCreateEvent(ctx){
+        const {id} = ctx.params
+        const DURATION_EVENT_MINUTES = 30
+        const TITLE_EVENT = 'ASESORIA'
 
-    const {GOOGLE_CALENDAR_CLIENT_ID, GOOGLE_CALENDAR_CLIENT_SECRET, GOOGLE_CALENDAR_TOKEN} = process.env
+        /*GET DATA FROM ALREADY CREATED CITA*/
+        const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ id }))
 
-    const oAuth2Client = new OAuth2(GOOGLE_CALENDAR_CLIENT_ID, GOOGLE_CALENDAR_CLIENT_SECRET)
-    oAuth2Client.setCredentials({
-        refresh_token: GOOGLE_CALENDAR_TOKEN
-    })
+        /*DEFINE WHEN EVENT ENDS*/
+        const eDatetime = new Date(fecha)
+        const sDatetime = new Date(fecha)
+        eDatetime.setMinutes(sDatetime.getMinutes() + DURATION_EVENT_MINUTES)
 
-    const calendar = google.calendar({version: 'v3', auth: oAuth2Client})
-
-    let response;
-    try{
-        const calResponse = await calendar.freebusy.query({
-            resource: {
-                timeMin: startDatetime,
-                timeMax: endDatetime,
-                items: [{
-                    id: "primary"
-                }]
+        /*CREATE EVENT ON GOOGLE CALENDAR*/
+        let response = ''
+        try{
+            const calendar = await getGoogleCalendar();
+            const busyHours = await getBusyHours(calendar, sDatetime, eDatetime)
+            if(busyHours.length != 0){
+                return ctx.serverUnavailable('Este horario ya esta en ocupado');
+            }else{
+                await createEvent(calendar, TITLE_EVENT, asunto, sDatetime, eDatetime, usuario.email)
+                response = {
+                    statusCode: 200,
+                    message: "La asesoría se registro en el calendario exitosamente"
+                }
             }
-        })
-        response = calResponse.data.calendars.primary.busy
-    }catch(error){
-        console.log(error)
-        ctx.serverUnavailable('Error al conectar con Google Calendar');
+        }catch(error){
+            console.log(error)
+            return ctx.serverUnavailable('Error al conectar con Google Calendar');
+        }
+
+        /*UPDATE STATUS = REGISTRADA*/
+        await strapi.services.citas.update({ id }, {status: "REGISTRADA"});
+
+
+        return response;
     }
 
-    return response
-  },
+
 
 };

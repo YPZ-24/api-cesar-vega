@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/citas/:id/event",
+      "handler": "citas.updateCreateEvent",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

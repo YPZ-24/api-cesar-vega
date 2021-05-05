@@ -588,6 +588,89 @@
           }
         ]
       }
+    },
+    "/citas/{id}/event": {
+      "put": {
+        "deprecated": false,
+        "description": "Update a single citas record",
+        "responses": {
+          "200": {
+            "description": "Retrieve citas document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "summary": "",
+        "tags": [
+          "Citas"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -603,9 +686,6 @@
           "fecha": {
             "type": "string",
             "format": "date-time"
-          },
-          "pagada": {
-            "type": "boolean"
           },
           "asunto": {
             "type": "string"
@@ -700,6 +780,19 @@
               }
             }
           },
+          "status": {
+            "type": "string",
+            "default": "CREADA",
+            "enum": [
+              "CREADA",
+              "PAGADA",
+              "REGISTRADA",
+              "ENVIADA"
+            ]
+          },
+          "enlace": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -712,13 +805,23 @@
             "type": "string",
             "format": "date-time"
           },
-          "pagada": {
-            "type": "boolean"
-          },
           "asunto": {
             "type": "string"
           },
           "usuario": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "default": "CREADA",
+            "enum": [
+              "CREADA",
+              "PAGADA",
+              "REGISTRADA",
+              "ENVIADA"
+            ]
+          },
+          "enlace": {
             "type": "string"
           },
           "published_at": {
