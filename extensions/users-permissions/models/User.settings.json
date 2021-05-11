@@ -72,28 +72,31 @@
       "type": "decimal"
     },
     "codigos": {
-      "via": "usuarioPropietario",
-      "collection": "codigos"
+      "collection": "codigos",
+      "via": "usuarioPropietario"
     },
     "codigoReferido": {
-      "via": "usuarioReferido",
-      "model": "codigos"
+      "model": "codigos",
+      "via": "usuarioReferido"
     },
     "citas": {
-      "via": "usuario",
-      "collection": "citas"
+      "collection": "citas",
+      "via": "usuario"
     },
     "contrataciones": {
-      "via": "usuario",
-      "collection": "contratacion"
+      "collection": "contratacion",
+      "via": "usuario"
     },
     "videos_usuarios": {
-      "via": "usuario",
-      "collection": "videos-usuario"
+      "collection": "videos-usuario",
+      "via": "usuario"
     },
     "cursos_usuarios": {
-      "via": "user",
-      "collection": "calificaciones-curso"
+      "collection": "calificaciones-curso",
+      "via": "user"
+    },
+    "customerId": {
+      "type": "uid"
     }
   }
 }

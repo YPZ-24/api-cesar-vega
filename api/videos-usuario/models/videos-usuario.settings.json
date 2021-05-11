@@ -14,9 +14,9 @@
       "type": "boolean"
     },
     "usuario": {
+      "via": "videos_usuarios",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "videos_usuarios"
+      "model": "user"
     },
     "video": {
       "model": "videos",

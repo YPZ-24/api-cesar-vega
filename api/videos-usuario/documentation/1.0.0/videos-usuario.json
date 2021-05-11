@@ -620,6 +620,9 @@
                   "type": "string"
                 }
               },
+              "customerId": {
+                "type": "uid"
+              },
               "created_by": {
                 "type": "string"
               },

@@ -1467,6 +1467,9 @@
                 }
               }
             }
+          },
+          "customerId": {
+            "type": "uid"
           }
         }
       },
@@ -1554,6 +1557,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "customerId": {
+            "type": "uid"
           },
           "created_by": {
             "type": "string"

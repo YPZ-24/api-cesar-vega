@@ -19,9 +19,9 @@
       "via": "cursos_usuario"
     },
     "user": {
+      "via": "cursos_usuarios",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "cursos_usuarios"
+      "model": "user"
     },
     "curso": {
       "model": "cursos",

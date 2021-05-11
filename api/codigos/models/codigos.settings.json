@@ -18,14 +18,14 @@
       "type": "boolean"
     },
     "usuarioPropietario": {
+      "via": "codigos",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "codigos"
+      "model": "user"
     },
     "usuarioReferido": {
+      "via": "codigoReferido",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "codigoReferido"
+      "model": "user"
     }
   }
 }

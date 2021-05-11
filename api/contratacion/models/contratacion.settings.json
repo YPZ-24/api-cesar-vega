@@ -12,9 +12,9 @@
   },
   "attributes": {
     "usuario": {
+      "via": "contrataciones",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "contrataciones"
+      "model": "user"
     },
     "asunto": {
       "type": "string"

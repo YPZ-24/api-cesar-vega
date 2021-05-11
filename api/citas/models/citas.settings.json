@@ -18,9 +18,9 @@
       "type": "string"
     },
     "usuario": {
+      "via": "citas",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "citas"
+      "model": "user"
     },
     "status": {
       "type": "enumeration",
