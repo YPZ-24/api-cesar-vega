@@ -1,5 +1,4 @@
 module.exports = {
-    //
     graphql: {
       endpoint: '/graphql',
       shadowCRUD: true,
