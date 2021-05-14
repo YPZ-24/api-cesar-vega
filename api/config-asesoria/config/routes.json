@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/config-asesoria",
+      "handler": "config-asesoria.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/config-asesoria",
+      "handler": "config-asesoria.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/config-asesoria",
+      "handler": "config-asesoria.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

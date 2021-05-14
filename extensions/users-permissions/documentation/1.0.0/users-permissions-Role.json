@@ -555,11 +555,11 @@
                 "confirmed": {
                   "type": "boolean"
                 },
-                "blocked": {
-                  "type": "boolean"
-                },
                 "role": {
                   "type": "string"
+                },
+                "blocked": {
+                  "type": "boolean"
                 },
                 "edad": {
                   "type": "integer"
@@ -600,14 +600,14 @@
                     "type": "string"
                   }
                 },
+                "customerId": {
+                  "type": "string"
+                },
                 "cursos_usuarios": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "customerId": {
-                  "type": "uid"
                 },
                 "created_by": {
                   "type": "string"

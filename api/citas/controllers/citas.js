@@ -1,10 +1,10 @@
 const {getGoogleCalendar, getBusyHours, createEvent} = require('../../../util/calendar')
 const stripe = require('stripe')('sk_test_51IpoF8GDAdhWlzXRqu29yBWkVUQA7pTuGACsKBihhRjIbXGs4OfeCdnpsQSAGXmMWJHRxrsms092HHwHLsEv2lJl00G85h7jHB');
-
+const {pay} = require('../../../util/stripe')
 
 module.exports = {
 
-    async findBusyy(ctx) {
+    async findBusyHours(ctx) {
         
         const { timeMin, timeMax } = ctx.params;
         const startDatetime = new Date(timeMin)
@@ -24,18 +24,18 @@ module.exports = {
         return response
     },
 
-    async updateCreateEvent(ctx){
-        const {id} = ctx.params
-        const DURATION_EVENT_MINUTES = 30
+    async addCitaToSchedule(ctx){
+        const CITA_ID = ctx.params.id
+        const {duracion} = await strapi.services['config-asesoria'].find()
         const TITLE_EVENT = 'ASESORIA'
 
         /*GET DATA FROM ALREADY CREATED CITA*/
-        const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ id }))
+        const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ CITA_ID }))
 
         /*DEFINE WHEN EVENT ENDS*/
         const eDatetime = new Date(fecha)
         const sDatetime = new Date(fecha)
-        eDatetime.setMinutes(sDatetime.getMinutes() + DURATION_EVENT_MINUTES)
+        eDatetime.setMinutes(sDatetime.getMinutes() + {duracion})
 
         /*CREATE EVENT ON GOOGLE CALENDAR*/
         let response = ''
@@ -57,58 +57,35 @@ module.exports = {
         }
 
         /*UPDATE STATUS = REGISTRADA*/
-        await strapi.services.citas.update({ id }, {status: "REGISTRADA"});
+        await strapi.services.citas.update({ id: CITA_ID }, {status: "AGENDADA"});
 
 
         return response;
     },
 
-    async findBusssy(ctx){
-        //const customer = await stripe.customers.create();
-        const CUSTOMER_ID = 'cus_JSl6CMExRCx54s'
-        const AMOUNT = 20000
-        const PAYMENT_METHOD_ID = 'card_1IppaRGDAdhWlzXRF9K0Idcd'
+    async payCita(ctx){
+        /*Get data from authenticated user*/
+        const {customerId} = ctx.state.user
+        /*Get data from params*/
+        const {id, idPaymentMethod} = ctx.params
+        /*Get data from config asesoria*/
+        const {costo} = await strapi.services['config-asesoria'].find()
+        
         try{
-            const intent = await stripe.paymentIntents.create({
-                amount: AMOUNT,
-                currency: 'MXN',
-                customer: CUSTOMER_ID,
-                payment_method: PAYMENT_METHOD_ID,
-                payment_method_types: ['card'],
-                confirm: true
-            });
+            //Pay with stripe
+            await pay({CUSTOMER_ID: customerId, AMOUNT: costo, PAYMENT_METHOD_ID: idPaymentMethod})
+            
+            //UPDATE STATUS = REGISTRADA
+            await strapi.services.citas.update({ id }, {status: "PAGADA"});
 
-            let response;
-            if(intent.status === 'succeeded'){
-                response = {
-                    statusCode: 200,
-                    message: "Pago Exitoso"
-                }
-            }else{
-                return ctx.serverUnavailable('Algo anda mal');
+            return {
+                statusCode: 200,
+                message: 'Pago existoso'
             }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Algo anda mal');
+            return ctx.badImplementation('Error al realizar el pago') 
         }
-
-        return response
-    },
-
-    async findBusy(ctx){
-        const CUSTOMER_ID = 'cus_JSl6CMExRCx54s'
-        let paymentMethods = []
-        try{
-            paymentMethods = await stripe.paymentMethods.list({
-                customer: CUSTOMER_ID,
-                type: 'card',
-            });
-        }catch(error){
-            console.log(error)
-            return ctx.badImplementation('Ocurrio un error en el servidor')   
-        }
-        return paymentMethods.data;
     }
-
-
+    
 };

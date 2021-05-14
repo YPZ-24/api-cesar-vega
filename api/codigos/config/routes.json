@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/codigos/:id/use",
+      "handler": "codigos.useCode",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

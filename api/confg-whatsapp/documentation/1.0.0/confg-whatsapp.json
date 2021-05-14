@@ -1,18 +1,19 @@
 {
   "paths": {
-    "/contratacions": {
+    "/confg-whatsapp": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the confg-whatsapp's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve confg-whatsapp document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Contratacion"
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -51,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Confg-whatsapp"
         ],
         "parameters": [
           {
@@ -192,81 +193,18 @@
           }
         ]
       },
-      "post": {
+      "put": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Update a single confg-whatsapp record",
         "responses": {
           "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Contratacion"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewContratacion"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/contratacions/count": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
+            "description": "Retrieve confg-whatsapp document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "properties": {
-                    "count": {
-                      "type": "integer"
+                    "foo": {
+                      "type": "string"
                     }
                   }
                 }
@@ -306,122 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
-        ],
-        "parameters": []
-      }
-    },
-    "/contratacions/{id}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Contratacion"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      },
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Contratacion"
+          "Confg-whatsapp"
         ],
         "requestBody": {
           "description": "",
@@ -429,30 +252,19 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContratacion"
+                "$ref": "#/components/schemas/NewConfg-whatsapp"
               }
             }
           }
         },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        "parameters": []
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single confg-whatsapp record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single confg-whatsapp based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,26 +307,15 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Confg-whatsapp"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
+        "parameters": []
       }
     }
   },
   "components": {
     "schemas": {
-      "Contratacion": {
+      "Confg-whatsapp": {
         "required": [
           "id"
         ],
@@ -522,100 +323,7 @@
           "id": {
             "type": "string"
           },
-          "usuario": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "edad": {
-                "type": "integer"
-              },
-              "fechaNacimiento": {
-                "type": "string"
-              },
-              "telefono": {
-                "type": "integer"
-              },
-              "saldo": {
-                "type": "number"
-              },
-              "codigos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "codigoReferido": {
-                "type": "string"
-              },
-              "citas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "contrataciones": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "videos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "customerId": {
-                "type": "string"
-              },
-              "cursos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "asunto": {
+          "url": {
             "type": "string"
           },
           "published_at": {
@@ -624,12 +332,9 @@
           }
         }
       },
-      "NewContratacion": {
+      "NewConfg-whatsapp": {
         "properties": {
-          "usuario": {
-            "type": "string"
-          },
-          "asunto": {
+          "url": {
             "type": "string"
           },
           "published_at": {
@@ -646,9 +351,5 @@
       }
     }
   },
-  "tags": [
-    {
-      "name": "Contratacion"
-    }
-  ]
+  "tags": []
 }

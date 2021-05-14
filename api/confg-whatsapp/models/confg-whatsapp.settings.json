@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "confg_whatsapps",
+  "info": {
+    "name": "ConfgWhatsapp"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "url": {
+      "type": "string"
+    }
+  }
+}

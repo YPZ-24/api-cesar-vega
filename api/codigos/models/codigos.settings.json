@@ -15,7 +15,8 @@
       "type": "uid"
     },
     "usado": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "usuarioPropietario": {
       "via": "codigos",

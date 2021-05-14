@@ -48,16 +48,15 @@
       "default": false,
       "configurable": false
     },
-    "blocked": {
-      "type": "boolean",
-      "default": false,
-      "configurable": false
-    },
     "role": {
       "model": "role",
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "blocked": {
+      "type": "boolean",
+      "default": true
     },
     "edad": {
       "type": "integer"
@@ -69,7 +68,8 @@
       "type": "integer"
     },
     "saldo": {
-      "type": "decimal"
+      "type": "decimal",
+      "default": 0
     },
     "codigos": {
       "collection": "codigos",
@@ -91,12 +91,12 @@
       "collection": "videos-usuario",
       "via": "usuario"
     },
-    "cursos_usuarios": {
-      "collection": "calificaciones-curso",
-      "via": "user"
-    },
     "customerId": {
-      "type": "uid"
+      "type": "string"
+    },
+    "cursos_usuarios": {
+      "collection": "cursos-usuario",
+      "via": "user"
     }
   }
 }

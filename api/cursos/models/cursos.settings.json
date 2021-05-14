@@ -32,7 +32,7 @@
     },
     "cursos_usuarios": {
       "via": "curso",
-      "collection": "calificaciones-curso"
+      "collection": "cursos-usuario"
     }
   }
 }

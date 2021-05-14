@@ -27,8 +27,7 @@
       "enum": [
         "CREADA",
         "PAGADA",
-        "REGISTRADA",
-        "ENVIADA"
+        "AGENDADA"
       ],
       "default": "CREADA"
     },

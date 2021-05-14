@@ -511,7 +511,7 @@
         ]
       }
     },
-    "/citas/calendar/busy/{timeMin}/{timeMax}": {
+    "/citas/busyHours/{timeMin}/{timeMax}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -589,10 +589,10 @@
         ]
       }
     },
-    "/citas/{id}/event": {
-      "put": {
+    "/citas/{id}/pay/paymentMethod/{idPaymentMethod}": {
+      "post": {
         "deprecated": false,
-        "description": "Update a single citas record",
+        "description": "Create a new citas record",
         "responses": {
           "200": {
             "description": "Retrieve citas document(s)",
@@ -657,19 +657,78 @@
               }
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
+        }
+      }
+    },
+    "/citas/{id}/schedule": {
+      "post": {
+        "deprecated": false,
+        "description": "Create a new citas record",
+        "responses": {
+          "200": {
+            "description": "Retrieve citas document(s)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "foo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
             }
           }
-        ]
+        },
+        "summary": "",
+        "tags": [
+          "Citas"
+        ],
+        "requestBody": {
+          "description": "",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "foo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -766,14 +825,14 @@
                   "type": "string"
                 }
               },
+              "customerId": {
+                "type": "string"
+              },
               "cursos_usuarios": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
-              },
-              "customerId": {
-                "type": "uid"
               },
               "created_by": {
                 "type": "string"
@@ -789,8 +848,7 @@
             "enum": [
               "CREADA",
               "PAGADA",
-              "REGISTRADA",
-              "ENVIADA"
+              "AGENDADA"
             ]
           },
           "enlace": {
@@ -820,8 +878,7 @@
             "enum": [
               "CREADA",
               "PAGADA",
-              "REGISTRADA",
-              "ENVIADA"
+              "AGENDADA"
             ]
           },
           "enlace": {

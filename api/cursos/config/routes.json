@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/cursos/:id/pay/paymentMethod/:idPaymentMethod",
+      "handler": "cursos.payCurso",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

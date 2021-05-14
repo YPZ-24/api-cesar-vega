@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/calificaciones-cursos": {
+    "/cursos-usuarios": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "parameters": [
           {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "requestBody": {
           "description": "",
@@ -252,14 +252,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCalificaciones-curso"
+                "$ref": "#/components/schemas/NewCursos-usuario"
               }
             }
           }
         }
       }
     },
-    "/calificaciones-cursos/count": {
+    "/cursos-usuarios/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -311,12 +311,12 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "parameters": []
       }
     },
-    "/calificaciones-cursos/{id}": {
+    "/cursos-usuarios/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "parameters": [
           {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCalificaciones-curso"
+                "$ref": "#/components/schemas/NewCursos-usuario"
               }
             }
           }
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Calificaciones-curso"
+          "Cursos-usuario"
         ],
         "parameters": [
           {
@@ -527,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Calificaciones-curso": {
+      "Cursos-usuario": {
         "required": [
           "id"
         ],
@@ -536,35 +536,7 @@
             "type": "string"
           },
           "calificacion": {
-            "type": "number"
-          },
-          "comentarios": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "comentario": {
-                  "type": "string"
-                },
-                "cursos_usuario": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
+            "type": "integer"
           },
           "user": {
             "required": [
@@ -642,20 +614,48 @@
                   "type": "string"
                 }
               },
+              "customerId": {
+                "type": "string"
+              },
               "cursos_usuarios": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "customerId": {
-                "type": "uid"
-              },
               "created_by": {
                 "type": "string"
               },
               "updated_by": {
                 "type": "string"
+              }
+            }
+          },
+          "comentarios": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "cursos_usuario": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -708,19 +708,19 @@
           }
         }
       },
-      "NewCalificaciones-curso": {
+      "NewCursos-usuario": {
         "properties": {
           "calificacion": {
-            "type": "number"
+            "type": "integer"
+          },
+          "user": {
+            "type": "string"
           },
           "comentarios": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "user": {
-            "type": "string"
           },
           "curso": {
             "type": "string"

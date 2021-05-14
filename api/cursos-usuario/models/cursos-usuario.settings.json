@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "cursos-usuario",
+  "collectionName": "cursos_usuarios",
   "info": {
-    "name": "CursosUsuario",
-    "description": ""
+    "name": "CursosUsuario"
   },
   "options": {
     "increments": true,
@@ -12,16 +11,16 @@
   },
   "attributes": {
     "calificacion": {
-      "type": "decimal"
-    },
-    "comentarios": {
-      "collection": "curso-comentarios",
-      "via": "cursos_usuario"
+      "type": "integer"
     },
     "user": {
       "via": "cursos_usuarios",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "comentarios": {
+      "collection": "curso-comentarios",
+      "via": "cursos_usuario"
     },
     "curso": {
       "model": "cursos",

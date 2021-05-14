@@ -16,7 +16,7 @@
     },
     "cursos_usuario": {
       "via": "comentarios",
-      "model": "calificaciones-curso"
+      "model": "cursos-usuario"
     }
   }
 }

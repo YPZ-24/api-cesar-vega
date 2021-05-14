@@ -1209,10 +1209,6 @@
             "type": "boolean",
             "default": false
           },
-          "blocked": {
-            "type": "boolean",
-            "default": false
-          },
           "role": {
             "required": [
               "id",
@@ -1251,6 +1247,10 @@
               }
             }
           },
+          "blocked": {
+            "type": "boolean",
+            "default": true
+          },
           "edad": {
             "type": "integer"
           },
@@ -1262,7 +1262,8 @@
             "type": "integer"
           },
           "saldo": {
-            "type": "number"
+            "type": "number",
+            "default": 0
           },
           "codigos": {
             "type": "array",
@@ -1353,8 +1354,7 @@
                   "enum": [
                     "CREADA",
                     "PAGADA",
-                    "REGISTRADA",
-                    "ENVIADA"
+                    "AGENDADA"
                   ]
                 },
                 "enlace": {
@@ -1431,6 +1431,9 @@
               }
             }
           },
+          "customerId": {
+            "type": "string"
+          },
           "cursos_usuarios": {
             "type": "array",
             "items": {
@@ -1442,16 +1445,16 @@
                   "type": "string"
                 },
                 "calificacion": {
-                  "type": "number"
+                  "type": "integer"
+                },
+                "user": {
+                  "type": "string"
                 },
                 "comentarios": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
-                },
-                "user": {
-                  "type": "string"
                 },
                 "curso": {
                   "type": "string"
@@ -1467,9 +1470,6 @@
                 }
               }
             }
-          },
-          "customerId": {
-            "type": "uid"
           }
         }
       },
@@ -1505,12 +1505,12 @@
             "type": "boolean",
             "default": false
           },
-          "blocked": {
-            "type": "boolean",
-            "default": false
-          },
           "role": {
             "type": "string"
+          },
+          "blocked": {
+            "type": "boolean",
+            "default": true
           },
           "edad": {
             "type": "integer"
@@ -1523,7 +1523,8 @@
             "type": "integer"
           },
           "saldo": {
-            "type": "number"
+            "type": "number",
+            "default": 0
           },
           "codigos": {
             "type": "array",
@@ -1552,14 +1553,14 @@
               "type": "string"
             }
           },
+          "customerId": {
+            "type": "string"
+          },
           "cursos_usuarios": {
             "type": "array",
             "items": {
               "type": "string"
             }
-          },
-          "customerId": {
-            "type": "uid"
           },
           "created_by": {
             "type": "string"

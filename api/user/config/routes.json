@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/user/paymentMethods",
+      "handler": "User.getPaymentMethods",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/user/customerId",
+      "handler": "User.createCustomerId",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

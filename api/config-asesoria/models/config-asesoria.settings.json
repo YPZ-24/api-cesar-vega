@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "config_asesorias",
+  "info": {
+    "name": "ConfigAsesoria"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "duracion": {
+      "type": "integer"
+    },
+    "costo": {
+      "type": "decimal"
+    }
+  }
+}

@@ -50,16 +50,24 @@
     },
     {
       "method": "GET",
-      "path": "/citas/calendar/busy/:timeMin/:timeMax",
-      "handler": "citas.findBusy",
+      "path": "/citas/busyHours/:timeMin/:timeMax",
+      "handler": "citas.findBusyHours",
       "config": {
         "policies": []
       }
     },
     {
-      "method": "PUT",
-      "path": "/citas/:id/event",
-      "handler": "citas.updateCreateEvent",
+      "method": "POST",
+      "path": "/citas/:id/pay/paymentMethod/:idPaymentMethod",
+      "handler": "citas.payCita",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/citas/:id/schedule",
+      "handler": "citas.addCitaToSchedule",
       "config": {
         "policies": []
       }

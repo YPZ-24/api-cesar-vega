@@ -547,16 +547,16 @@
                 "type": "string"
               },
               "calificacion": {
-                "type": "number"
+                "type": "integer"
+              },
+              "user": {
+                "type": "string"
               },
               "comentarios": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
-              },
-              "user": {
-                "type": "string"
               },
               "curso": {
                 "type": "string"
