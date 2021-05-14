@@ -65,7 +65,7 @@
       "type": "date"
     },
     "telefono": {
-      "type": "integer"
+      "type": "biginteger"
     },
     "saldo": {
       "type": "decimal",
