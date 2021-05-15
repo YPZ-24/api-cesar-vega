@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/citas": {
+    "/dispositivos": {
       "get": {
         "deprecated": false,
-        "description": "Find all the citas's records",
+        "description": "Find all the dispositivos's records",
         "responses": {
           "200": {
-            "description": "Retrieve citas document(s)",
+            "description": "Retrieve dispositivos document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Citas"
+                    "$ref": "#/components/schemas/Dispositivos"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new citas record",
+        "description": "Create a new dispositivos record",
         "responses": {
           "200": {
-            "description": "Retrieve citas document(s)",
+            "description": "Retrieve dispositivos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Citas"
+                  "$ref": "#/components/schemas/Dispositivos"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCitas"
+                "$ref": "#/components/schemas/NewDispositivos"
               }
             }
           }
         }
       }
     },
-    "/citas/count": {
+    "/dispositivos/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of citas documents",
+        "description": "Retrieve the numver of dispositivos documents",
         "responses": {
           "200": {
-            "description": "Retrieve citas document(s)",
+            "description": "Retrieve dispositivos document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "parameters": []
       }
     },
-    "/citas/{id}": {
+    "/dispositivos/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one citas record",
+        "description": "Find one dispositivos record",
         "responses": {
           "200": {
-            "description": "Retrieve citas document(s)",
+            "description": "Retrieve dispositivos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Citas"
+                  "$ref": "#/components/schemas/Dispositivos"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single citas record",
+        "description": "Update a single dispositivos record",
         "responses": {
           "200": {
-            "description": "Retrieve citas document(s)",
+            "description": "Retrieve dispositivos document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Citas"
+                  "$ref": "#/components/schemas/Dispositivos"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCitas"
+                "$ref": "#/components/schemas/NewDispositivos"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single citas record",
+        "description": "Delete a single dispositivos record",
         "responses": {
           "200": {
-            "description": "deletes a single citas based on the ID supplied",
+            "description": "deletes a single dispositivos based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Citas"
+          "Dispositivos"
         ],
         "parameters": [
           {
@@ -510,231 +510,11 @@
           }
         ]
       }
-    },
-    "/citas/busyHours/{timeMin}/{timeMax}": {
-      "get": {
-        "deprecated": false,
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "Retrieve citas document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Citas"
-        ],
-        "parameters": [
-          {
-            "name": "timeMin",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "timeMax",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/citas/{id}/pay/paymentMethod/{idPaymentMethod}": {
-      "post": {
-        "deprecated": false,
-        "description": "Create a new citas record",
-        "responses": {
-          "200": {
-            "description": "Retrieve citas document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Citas"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/citas/{id}/schedule": {
-      "post": {
-        "deprecated": false,
-        "description": "Create a new citas record",
-        "responses": {
-          "200": {
-            "description": "Retrieve citas document(s)",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Citas"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
     "schemas": {
-      "Citas": {
+      "Dispositivos": {
         "required": [
           "id"
         ],
@@ -742,14 +522,10 @@
           "id": {
             "type": "string"
           },
-          "fecha": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "asunto": {
+          "token": {
             "type": "string"
           },
-          "usuario": {
+          "user": {
             "required": [
               "id",
               "username",
@@ -848,46 +624,18 @@
               }
             }
           },
-          "status": {
-            "type": "string",
-            "default": "CREADA",
-            "enum": [
-              "CREADA",
-              "PAGADA",
-              "AGENDADA"
-            ]
-          },
-          "enlace": {
-            "type": "string"
-          },
           "published_at": {
             "type": "string",
             "format": "date-time"
           }
         }
       },
-      "NewCitas": {
+      "NewDispositivos": {
         "properties": {
-          "fecha": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "asunto": {
+          "token": {
             "type": "string"
           },
-          "usuario": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string",
-            "default": "CREADA",
-            "enum": [
-              "CREADA",
-              "PAGADA",
-              "AGENDADA"
-            ]
-          },
-          "enlace": {
+          "user": {
             "type": "string"
           },
           "published_at": {
@@ -906,7 +654,7 @@
   },
   "tags": [
     {
-      "name": "Citas"
+      "name": "Dispositivos"
     }
   ]
 }

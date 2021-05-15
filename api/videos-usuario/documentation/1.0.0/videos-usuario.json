@@ -569,11 +569,11 @@
               "confirmed": {
                 "type": "boolean"
               },
-              "blocked": {
-                "type": "boolean"
-              },
               "role": {
                 "type": "string"
+              },
+              "blocked": {
+                "type": "boolean"
               },
               "edad": {
                 "type": "integer"
@@ -618,6 +618,12 @@
                 "type": "string"
               },
               "cursos_usuarios": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dispositivos": {
                 "type": "array",
                 "items": {
                   "type": "string"

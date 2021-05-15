@@ -11,6 +11,7 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "firebase-admin": "^9.8.0",
     "googleapis": "^39.2.0",
     "strapi": "3.5.4",
     "strapi-admin": "3.5.4",

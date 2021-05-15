@@ -31,6 +31,6 @@ module.exports = {
         console.log(error)
         return ctx.badImplementation('Error al crear cliente') 
       }
-  }
+  },
 
 };

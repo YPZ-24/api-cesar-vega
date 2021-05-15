@@ -1470,6 +1470,34 @@
                 }
               }
             }
+          },
+          "dispositivos": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "token": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       },
@@ -1557,6 +1585,12 @@
             "type": "string"
           },
           "cursos_usuarios": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "dispositivos": {
             "type": "array",
             "items": {
               "type": "string"

@@ -26,4 +26,7 @@ module.exports = {
             return ctx.badImplementation('Error al realizar el pago') 
         }
     }
+
+
+
 };

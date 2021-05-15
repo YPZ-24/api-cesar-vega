@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "dispositivos",
+  "info": {
+    "name": "Dispositivos"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "token": {
+      "type": "text"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "dispositivos"
+    }
+  }
+}

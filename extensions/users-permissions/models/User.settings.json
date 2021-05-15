@@ -97,6 +97,10 @@
     "cursos_usuarios": {
       "collection": "cursos-usuario",
       "via": "user"
+    },
+    "dispositivos": {
+      "via": "user",
+      "collection": "dispositivos"
     }
   }
 }
