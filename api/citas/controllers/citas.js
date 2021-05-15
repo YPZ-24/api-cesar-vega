@@ -1,66 +1,70 @@
-const {getGoogleCalendar, getBusyHours, createEvent} = require('../../../util/calendar')
-const stripe = require('stripe')('sk_test_51IpoF8GDAdhWlzXRqu29yBWkVUQA7pTuGACsKBihhRjIbXGs4OfeCdnpsQSAGXmMWJHRxrsms092HHwHLsEv2lJl00G85h7jHB');
+const {getBusyHours, createEvent} = require('../../../util/calendar')
 const {pay} = require('../../../util/stripe')
+const {sendEmail} = require('../../../util/mailer')
 
 module.exports = {
 
     async findBusyHours(ctx) {
-        
+        /*Get data from params*/
         const { timeMin, timeMax } = ctx.params;
         const startDatetime = new Date(timeMin)
         const endDatetime = new Date(timeMax)
+        /*Validations*/
         if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
         
-        let response = [];
+        /*Connect with google calendar and get freebusy hours*/
         try{
-            const calendar = await getGoogleCalendar();
-            const busyHours = await getBusyHours(calendar, startDatetime, endDatetime)
-            response = {"busyHours": busyHours}
+            const busyHours = await getBusyHours({startDatetime, endDatetime})
+            return response = {
+                status: 200,
+                "busyHours": busyHours
+            }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Error al conectar con Google Calendar');
+            return ctx.serverUnavailable('Error al conectar con Calendar');
         }
-        
-        return response
     },
 
     async addCitaToSchedule(ctx){
-        const CITA_ID = ctx.params.id
+        /*Get data from params*/
+        const {id} = ctx.params
         const {duracion} = await strapi.services['config-asesoria'].find()
         const TITLE_EVENT = 'ASESORIA'
 
-        /*GET DATA FROM ALREADY CREATED CITA*/
-        const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ CITA_ID }))
+        /*Get data from already created cita*/
+        const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ id }))
 
-        /*DEFINE WHEN EVENT ENDS*/
+        /*Define when cita ends*/
         const eDatetime = new Date(fecha)
         const sDatetime = new Date(fecha)
-        eDatetime.setMinutes(sDatetime.getMinutes() + {duracion})
-
-        /*CREATE EVENT ON GOOGLE CALENDAR*/
-        let response = ''
+        eDatetime.setMinutes(sDatetime.getMinutes() + duracion)
         try{
-            const calendar = await getGoogleCalendar();
-            const busyHours = await getBusyHours(calendar, sDatetime, eDatetime)
+            /*Validations*/
+            const busyHours = await getBusyHours({startDatetime: sDatetime, endDatetime: eDatetime})
             if(busyHours.length != 0){
                 return ctx.serverUnavailable('Este horario ya esta en ocupado');
             }else{
-                await createEvent(calendar, TITLE_EVENT, asunto, sDatetime, eDatetime, usuario.email)
-                response = {
+                /*Create Google Calendar Event*/
+                const {data} = await createEvent({
+                    title: TITLE_EVENT, 
+                    description: asunto, 
+                    startDatetime: sDatetime, 
+                    endDatetime: eDatetime, 
+                    attendeeEmail: usuario.email
+                })
+                
+                /*Update STATUS = REGISTRADA and save link to conference*/
+                await strapi.services.citas.update({ id }, {status: "AGENDADA", enlace: data.hangoutLink});
+
+                return {
                     statusCode: 200,
-                    message: "La asesoría se registro en el calendario exitosamente"
+                    message: "Asesoría agendada"
                 }
             }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Error al conectar con Google Calendar');
+            return ctx.serverUnavailable('Error al conectar con Calendar');
         }
-
-        /*UPDATE STATUS = REGISTRADA*/
-        await strapi.services.citas.update({ id: CITA_ID }, {status: "AGENDADA"});
-
-
-        return response;
     },
 
     async payCita(ctx){
@@ -75,7 +79,7 @@ module.exports = {
             //Pay with stripe
             await pay({CUSTOMER_ID: customerId, AMOUNT: costo, PAYMENT_METHOD_ID: idPaymentMethod})
             
-            //UPDATE STATUS = REGISTRADA
+            //Update STATUS = PAGADA
             await strapi.services.citas.update({ id }, {status: "PAGADA"});
 
             return {
@@ -86,6 +90,28 @@ module.exports = {
             console.log(error)
             return ctx.badImplementation('Error al realizar el pago') 
         }
-    }
+    },
     
+    async sendEmailWithConferenceLink(ctx){
+        /*Get data from params*/
+        const {id} = ctx.params
+        /*Get data from citas*/
+        const {enlace, usuario, asunto} = await strapi.services.citas.findOne({ id });
+        /*Sending email with cita conference link*/
+        try{
+            await sendEmail( {
+                message: `${asunto}, Link para sesión: ${enlace}`, 
+                receiver: usuario.email, 
+                subject: "CESAR VEGA | ASESORIA" 
+            })
+            return {
+                status: 200,
+                message: "Link para asesoría enviado"
+            }
+        }catch(error){
+            console.log(error)
+            return ctx.badImplementation('Ocurrio un error al enviar email')
+        }
+    }
+
 };

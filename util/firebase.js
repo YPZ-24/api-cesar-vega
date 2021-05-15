@@ -1,14 +1,21 @@
 const firebaseKey = require('../keys/firebaseKey.json') 
+let firebaseAdmin
 
 function initializeFirebase(){
-    const firebaseAdmin = require("firebase-admin");
-    firebaseAdmin.initializeApp({
-        credential: firebaseAdmin.credential.cert(firebaseKey)
-    });
+    if(!firebaseAdmin){
+        firebaseAdmin = require("firebase-admin");
+        firebaseAdmin.initializeApp({
+            credential: firebaseAdmin.credential.cert(firebaseKey)
+        });
+    }
     return firebaseAdmin;
 }
 
 async function sendNotificationByTokens({title, body, tokens}){
+    if(tokens.length===0){
+        console.log('0/0 messages were sent, no devices yet')
+        return false;
+    }
     const message = {
         notification: {
             title: title,

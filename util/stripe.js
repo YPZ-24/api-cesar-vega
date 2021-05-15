@@ -7,7 +7,7 @@ async function pay({CUSTOMER_ID, AMOUNT, PAYMENT_METHOD_ID}){
         customer: CUSTOMER_ID,
         payment_method: PAYMENT_METHOD_ID,
         payment_method_types: ['card'],
-        confirm: true
+        //confirm: true
     });
     if(intent.status === 'succeeded'){
         return intent

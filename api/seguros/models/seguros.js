@@ -2,7 +2,7 @@ const {sendNotificationByTokens} = require('../../../util/firebase')
 
 module.exports = {
     lifecycles: {
-        async beforeCreate(data) {
+        async afterCreate(data) {
             const devices = await strapi.query('dispositivos').model.find({},{token: 1, _id: 0})
             const tokens = devices.map((d)=>d.token)
             await sendNotificationByTokens({title:'Nuevo Seguro Disponible...!', body:data.nombre, tokens:tokens})

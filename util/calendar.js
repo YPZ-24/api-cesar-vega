@@ -1,27 +1,28 @@
-const CALENDAR_ID = "aylinypz@soypolitecnico.org"
-const EMAIL_G_SUITE = "aylinypz@soypolitecnico.org"
+const CALENDAR_ID = process.env.CALENDAR_ID
+const EMAIL_G_SUITE = process.env.EMAIL_G_SUITE
 const {google} = require('googleapis');
 let privatekey = require("../keys/googleCredentials.json");
 
-function getGoogleCalendar(){
+async function getGoogleCalendar(){
     let jwtClient = new google.auth.JWT({
         email: privatekey.client_email,
         key: privatekey.private_key,
         scopes:['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'],
         subject: EMAIL_G_SUITE
     })
-
-    return new Promise((resolve, reject)=>{
-        jwtClient.authorize((error, tokens) => {
-            if (error) return reject(error)
-            return resolve(google.calendar({version: 'v3', auth: jwtClient}))
-        });
-    })
+    
+    try{
+        const r = await jwtClient.authorize()
+        return google.calendar({version: 'v3', auth: jwtClient})
+    }catch(error){
+        throw new Error(error)
+    }
 }
 
-async function getBusyHours(calendar, startDatetime, endDatetime){
-    return new Promise((resolve, reject)=>{
-        calendar.freebusy.query({
+async function getBusyHours({startDatetime, endDatetime}){
+    try{
+        const calendar = await getGoogleCalendar();
+        const res = await calendar.freebusy.query({
             resource: {
                 timeMin: startDatetime,
                 timeMax: endDatetime,
@@ -29,14 +30,14 @@ async function getBusyHours(calendar, startDatetime, endDatetime){
                     id: CALENDAR_ID
                 }]
             }
-        }, (error, res)=>{
-            if (error) return reject(error)
-            return resolve(res.data.calendars[CALENDAR_ID].busy)
         })
-    })
+        return res.data.calendars[CALENDAR_ID].busy
+    }catch(error){
+        throw new Error(error)
+    }
 }
 
-async function createEvent(calendar, title, description, startDatetime, endDatetime, attendeeEmail){
+async function createEvent({title, description, startDatetime, endDatetime, attendeeEmail}){
     const event = {
         summary: title,
         description: description,
@@ -49,7 +50,7 @@ async function createEvent(calendar, title, description, startDatetime, endDatet
         },
         conferenceData:{
             createRequest:{
-                requestId: "someRandomKey",
+                requestId: "cesarVegaKey",
                 conferenceSolutionKey: {
                     type: "hangoutsMeet"
                 },
@@ -62,16 +63,11 @@ async function createEvent(calendar, title, description, startDatetime, endDatet
             },
         ]
     };
-
-    return new Promise((resolve, reject)=>{
-        calendar.events.insert({
-            calendarId: CALENDAR_ID, 
-            conferenceDataVersion: 1,
-            resource: event
-        }, (error, res)=>{
-            if (error) return reject(error)
-            return resolve({eventId: res.data.id})
-        })
+    const calendar = await getGoogleCalendar();
+    return calendar.events.insert({
+        calendarId: CALENDAR_ID, 
+        conferenceDataVersion: 1,
+        resource: event
     })
 }
 

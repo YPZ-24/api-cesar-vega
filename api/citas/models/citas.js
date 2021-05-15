@@ -1,8 +1,12 @@
-'use strict';
-
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#lifecycle-hooks)
- * to customize this model
- */
-
-module.exports = {};
+module.exports = {
+    lifecycles: {
+        async beforeUpdate(params, data) {
+            //data.email = 'Some fixed name';
+            const {enlace: oldLink} = await strapi.services.citas.findOne({id: data._id}, )
+            const {enlace: newLink} = data
+            if(oldLink!==newLink){
+                console.log("ENVIAR MENSAJE CON LINK DE LA ASESORIA")
+            }
+        },
+    },
+};
