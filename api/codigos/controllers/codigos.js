@@ -53,8 +53,12 @@ module.exports = {
             /*Send saldo to usuarioPropietario*/
             const usuarioPropietarioId = code.usuarioPropietario.id;
             let {saldo} = await strapi.query('user', 'users-permissions').findOne({id: usuarioPropietarioId})
-            saldo += 200;
+            const {saldo: saldoADepositar} = await strapi.services['config-referidos'].find()
+            saldo += saldoADepositar;
             await strapi.query('user', 'users-permissions').update({id: usuarioPropietarioId}, { saldo })
+            /*UnBlock usuarioReferido*/
+            const usuarioReferidoId = code.usuarioReferido.id;
+            await strapi.query('user', 'users-permissions').update({id: usuarioReferidoId}, { blocked: false })
 
             return {
                 status: 200,

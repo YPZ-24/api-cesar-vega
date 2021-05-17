@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/config-referidos",
+      "handler": "config-referidos.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/config-referidos",
+      "handler": "config-referidos.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/config-referidos",
+      "handler": "config-referidos.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

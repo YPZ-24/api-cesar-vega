@@ -1,0 +1,17 @@
+{
+  "kind": "singleType",
+  "collectionName": "config_referidos",
+  "info": {
+    "name": "ConfigReferidos"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "saldo": {
+      "type": "integer"
+    }
+  }
+}

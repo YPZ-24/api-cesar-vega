@@ -20,6 +20,7 @@ async function getGoogleCalendar(){
 }
 
 async function getBusyHours({startDatetime, endDatetime}){
+    /*
     try{
         const calendar = await getGoogleCalendar();
         const res = await calendar.freebusy.query({
@@ -34,10 +35,12 @@ async function getBusyHours({startDatetime, endDatetime}){
         return res.data.calendars[CALENDAR_ID].busy
     }catch(error){
         throw new Error(error)
-    }
+    }*/
+    return []
 }
 
 async function createEvent({title, description, startDatetime, endDatetime, attendeeEmail}){
+    /*
     const event = {
         summary: title,
         description: description,
@@ -69,6 +72,12 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
         conferenceDataVersion: 1,
         resource: event
     })
+    */
+    return {
+        data: {
+            hangoutLink: 'https://meet.google.com/rnt-gpgs-pbu'
+        }
+    }
 }
 
 module.exports = {
