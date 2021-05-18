@@ -16,7 +16,7 @@ module.exports = {
         try{
             const busyHours = await getBusyHours({startDatetime, endDatetime})
             return response = {
-                status: 200,
+                statusCode: 200,
                 "busyHours": busyHours
             }
         }catch(error){
@@ -99,13 +99,14 @@ module.exports = {
         const {enlace, usuario, asunto} = await strapi.services.citas.findOne({ id });
         /*Sending email with cita conference link*/
         try{
+            /*
             await sendEmail( {
                 message: `${asunto}, Link para sesión: ${enlace}`, 
                 receiver: usuario.email, 
                 subject: "CESAR VEGA | ASESORIA" 
-            })
+            })*/
             return {
-                status: 200,
+                statusCode: 200,
                 message: "Link para asesoría enviado"
             }
         }catch(error){
