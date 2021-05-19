@@ -61,7 +61,7 @@ module.exports = {
             await strapi.query('user', 'users-permissions').update({id: usuarioReferidoId}, { blocked: false })
 
             return {
-                status: 200,
+                statusCode: 200,
                 message: 'Bienvenido'
             }
         }catch(error){

@@ -21,7 +21,14 @@ async function getCustomerCards({CUSTOMER_ID}){
         customer: CUSTOMER_ID,
         type: 'card',
     })
-    return paymentMethods.data
+    const cards = paymentMethods.data.map(pm => {
+        return {
+            id: pm.id, 
+            brand: pm.card.brand,
+            last4: pm.card.last4
+        }
+    });
+    return cards
 }
 
 async function generateCustomerId({CUSTOMER_EMAIL}){

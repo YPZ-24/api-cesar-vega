@@ -8,7 +8,11 @@ module.exports = {
       const {customerId} = ctx.state.user
       
       try{
-        return await getCustomerCards({CUSTOMER_ID: customerId})
+        const cards =  await getCustomerCards({CUSTOMER_ID: customerId})
+        return{
+          statusCode: 200,
+          cards
+        }
       }catch(error){
         console.log(error)
         return ctx.badImplementation('Error al obtener tarjetas guardadas') 

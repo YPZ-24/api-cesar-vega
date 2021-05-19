@@ -1,9 +1,9 @@
 {
   "paths": {
     "/user/paymentMethods": {
-      "post": {
+      "get": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "",
         "responses": {
           "200": {
             "description": "response",
@@ -54,21 +54,7 @@
         "tags": [
           "User"
         ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
+        "parameters": []
       }
     },
     "/user/customerId": {
