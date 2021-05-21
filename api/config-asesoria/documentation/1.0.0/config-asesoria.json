@@ -329,6 +329,12 @@
           "costo": {
             "type": "number"
           },
+          "horaMinima": {
+            "type": "string"
+          },
+          "horaMaxima": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -342,6 +348,12 @@
           },
           "costo": {
             "type": "number"
+          },
+          "horaMinima": {
+            "type": "string"
+          },
+          "horaMaxima": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
