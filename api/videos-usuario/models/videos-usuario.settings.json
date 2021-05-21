@@ -19,8 +19,8 @@
       "model": "user"
     },
     "video": {
-      "model": "videos",
-      "via": "videos_usuarios"
+      "via": "videos_usuarios",
+      "model": "videos"
     }
   }
 }

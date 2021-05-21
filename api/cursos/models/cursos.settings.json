@@ -27,8 +27,8 @@
       "type": "text"
     },
     "videos": {
-      "collection": "videos",
-      "via": "curso"
+      "via": "curso",
+      "collection": "videos"
     },
     "cursos_usuarios": {
       "via": "curso",

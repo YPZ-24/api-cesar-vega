@@ -27,15 +27,24 @@
       "required": false
     },
     "curso": {
-      "via": "videos",
-      "model": "cursos"
+      "model": "cursos",
+      "via": "videos"
     },
     "precio": {
       "type": "decimal"
     },
     "videos_usuarios": {
-      "via": "video",
-      "collection": "videos-usuario"
+      "collection": "videos-usuario",
+      "via": "video"
+    },
+    "portada": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
     }
   }
 }
