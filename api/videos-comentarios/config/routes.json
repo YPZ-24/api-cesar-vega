@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/curso-comentarios",
-      "handler": "curso-comentarios.find",
+      "path": "/videos-comentarios",
+      "handler": "videos-comentarios.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/curso-comentarios/count",
-      "handler": "curso-comentarios.count",
+      "path": "/videos-comentarios/count",
+      "handler": "videos-comentarios.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/curso-comentarios/:id",
-      "handler": "curso-comentarios.findOne",
+      "path": "/videos-comentarios/:id",
+      "handler": "videos-comentarios.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/curso-comentarios",
-      "handler": "curso-comentarios.create",
+      "path": "/videos-comentarios",
+      "handler": "videos-comentarios.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/curso-comentarios/:id",
-      "handler": "curso-comentarios.update",
+      "path": "/videos-comentarios/:id",
+      "handler": "videos-comentarios.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/curso-comentarios/:id",
-      "handler": "curso-comentarios.delete",
+      "path": "/videos-comentarios/:id",
+      "handler": "videos-comentarios.delete",
       "config": {
         "policies": []
       }

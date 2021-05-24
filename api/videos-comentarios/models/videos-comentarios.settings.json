@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "comentarios",
+  "collectionName": "videos_comentarios",
   "info": {
-    "name": "Comentarios",
-    "description": ""
+    "name": "VideosComentarios"
   },
   "options": {
     "increments": true,
@@ -14,9 +13,9 @@
     "comentario": {
       "type": "text"
     },
-    "cursos_usuario": {
-      "via": "comentarios",
-      "model": "cursos-usuario"
+    "video": {
+      "model": "videos",
+      "via": "comentarios"
     }
   }
 }

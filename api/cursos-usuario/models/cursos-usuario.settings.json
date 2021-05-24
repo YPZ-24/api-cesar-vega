@@ -18,10 +18,6 @@
       "plugin": "users-permissions",
       "model": "user"
     },
-    "comentarios": {
-      "collection": "curso-comentarios",
-      "via": "cursos_usuario"
-    },
     "curso": {
       "model": "cursos",
       "via": "cursos_usuarios"

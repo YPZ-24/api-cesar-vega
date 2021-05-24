@@ -1,12 +1,12 @@
 {
   "paths": {
-    "/curso-comentarios": {
+    "/videos-comentarios": {
       "get": {
         "deprecated": false,
-        "description": "Find all the curso-comentarios's records",
+        "description": "Find all the videos-comentarios's records",
         "responses": {
           "200": {
-            "description": "Retrieve curso-comentarios document(s)",
+            "description": "Retrieve videos-comentarios document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "parameters": [
           {
@@ -195,10 +195,10 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new curso-comentarios record",
+        "description": "Create a new videos-comentarios record",
         "responses": {
           "200": {
-            "description": "Retrieve curso-comentarios document(s)",
+            "description": "Retrieve videos-comentarios document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "requestBody": {
           "description": "",
@@ -252,20 +252,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCurso-comentarios"
+                "$ref": "#/components/schemas/NewVideos-comentarios"
               }
             }
           }
         }
       }
     },
-    "/curso-comentarios/count": {
+    "/videos-comentarios/count": {
       "get": {
         "deprecated": false,
-        "description": "Retrieve the numver of curso-comentarios documents",
+        "description": "Retrieve the numver of videos-comentarios documents",
         "responses": {
           "200": {
-            "description": "Retrieve curso-comentarios document(s)",
+            "description": "Retrieve videos-comentarios document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -311,18 +311,18 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "parameters": []
       }
     },
-    "/curso-comentarios/{id}": {
+    "/videos-comentarios/{id}": {
       "get": {
         "deprecated": false,
-        "description": "Find one curso-comentarios record",
+        "description": "Find one videos-comentarios record",
         "responses": {
           "200": {
-            "description": "Retrieve curso-comentarios document(s)",
+            "description": "Retrieve videos-comentarios document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "parameters": [
           {
@@ -385,10 +385,10 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a single curso-comentarios record",
+        "description": "Update a single videos-comentarios record",
         "responses": {
           "200": {
-            "description": "Retrieve curso-comentarios document(s)",
+            "description": "Retrieve videos-comentarios document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewCurso-comentarios"
+                "$ref": "#/components/schemas/NewVideos-comentarios"
               }
             }
           }
@@ -462,10 +462,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a single curso-comentarios record",
+        "description": "Delete a single videos-comentarios record",
         "responses": {
           "200": {
-            "description": "deletes a single curso-comentarios based on the ID supplied",
+            "description": "deletes a single videos-comentarios based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -508,7 +508,7 @@
         },
         "summary": "",
         "tags": [
-          "Curso-comentarios"
+          "Videos-comentarios"
         ],
         "parameters": [
           {
@@ -527,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Curso-comentarios": {
+      "Videos-comentarios": {
         "required": [
           "id"
         ],
@@ -538,7 +538,7 @@
           "comentario": {
             "type": "string"
           },
-          "cursos_usuario": {
+          "video": {
             "required": [
               "id"
             ],
@@ -546,10 +546,28 @@
               "id": {
                 "type": "string"
               },
-              "calificacion": {
-                "type": "integer"
+              "titulo": {
+                "type": "string"
               },
-              "user": {
+              "descripcion": {
+                "type": "string"
+              },
+              "video": {
+                "type": "string"
+              },
+              "curso": {
+                "type": "string"
+              },
+              "precio": {
+                "type": "number"
+              },
+              "videos_usuarios": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "portada": {
                 "type": "string"
               },
               "comentarios": {
@@ -557,9 +575,6 @@
                 "items": {
                   "type": "string"
                 }
-              },
-              "curso": {
-                "type": "string"
               },
               "published_at": {
                 "type": "string"
@@ -578,12 +593,12 @@
           }
         }
       },
-      "NewCurso-comentarios": {
+      "NewVideos-comentarios": {
         "properties": {
           "comentario": {
             "type": "string"
           },
-          "cursos_usuario": {
+          "video": {
             "type": "string"
           },
           "published_at": {

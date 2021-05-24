@@ -637,34 +637,6 @@
               }
             }
           },
-          "comentarios": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "comentario": {
-                  "type": "string"
-                },
-                "cursos_usuario": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
-          },
           "curso": {
             "required": [
               "id"
@@ -721,12 +693,6 @@
           },
           "user": {
             "type": "string"
-          },
-          "comentarios": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "curso": {
             "type": "string"

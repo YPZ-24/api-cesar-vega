@@ -739,6 +739,34 @@
               }
             }
           },
+          "comentarios": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "comentario": {
+                  "type": "string"
+                },
+                "video": {
+                  "type": "string"
+                },
+                "published_at": {
+                  "type": "string"
+                },
+                "created_by": {
+                  "type": "string"
+                },
+                "updated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -760,6 +788,12 @@
             "type": "number"
           },
           "videos_usuarios": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "comentarios": {
             "type": "array",
             "items": {
               "type": "string"

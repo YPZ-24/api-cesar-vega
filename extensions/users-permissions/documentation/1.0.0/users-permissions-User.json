@@ -1450,12 +1450,6 @@
                 "user": {
                   "type": "string"
                 },
-                "comentarios": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
                 "curso": {
                   "type": "string"
                 },
