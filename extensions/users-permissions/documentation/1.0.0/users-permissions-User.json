@@ -1419,6 +1419,15 @@
                 "video": {
                   "type": "string"
                 },
+                "calificacion": {
+                  "type": "number"
+                },
+                "videos_comentarios": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "published_at": {
                   "type": "string"
                 },
@@ -1433,37 +1442,6 @@
           },
           "customerId": {
             "type": "string"
-          },
-          "cursos_usuarios": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "calificacion": {
-                  "type": "integer"
-                },
-                "user": {
-                  "type": "string"
-                },
-                "curso": {
-                  "type": "string"
-                },
-                "published_at": {
-                  "type": "string"
-                },
-                "created_by": {
-                  "type": "string"
-                },
-                "updated_by": {
-                  "type": "string"
-                }
-              }
-            }
           },
           "dispositivos": {
             "type": "array",
@@ -1577,12 +1555,6 @@
           },
           "customerId": {
             "type": "string"
-          },
-          "cursos_usuarios": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           },
           "dispositivos": {
             "type": "array",

@@ -88,15 +88,11 @@
       "via": "usuario"
     },
     "videos_usuarios": {
-      "collection": "videos-usuario",
-      "via": "usuario"
+      "via": "usuario",
+      "collection": "videos-usuario"
     },
     "customerId": {
       "type": "string"
-    },
-    "cursos_usuarios": {
-      "collection": "cursos-usuario",
-      "via": "user"
     },
     "dispositivos": {
       "via": "user",

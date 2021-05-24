@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "videos_usuarios",
   "info": {
-    "name": "VideosUsuario"
+    "name": "VideosUsuario",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -14,13 +15,20 @@
       "type": "boolean"
     },
     "usuario": {
-      "via": "videos_usuarios",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "videos_usuarios"
     },
     "video": {
       "via": "videos_usuarios",
       "model": "videos"
+    },
+    "calificacion": {
+      "type": "decimal"
+    },
+    "videos_comentarios": {
+      "via": "videos_usuario",
+      "collection": "videos-comentarios"
     }
   }
 }

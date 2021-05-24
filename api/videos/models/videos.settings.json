@@ -45,10 +45,6 @@
       ],
       "plugin": "upload",
       "required": false
-    },
-    "comentarios": {
-      "via": "video",
-      "collection": "videos-comentarios"
     }
   }
 }

@@ -601,12 +601,6 @@
               "customerId": {
                 "type": "string"
               },
-              "cursos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "dispositivos": {
                 "type": "array",
                 "items": {

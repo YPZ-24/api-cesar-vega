@@ -29,10 +29,6 @@
     "videos": {
       "via": "curso",
       "collection": "videos"
-    },
-    "cursos_usuarios": {
-      "via": "curso",
-      "collection": "cursos-usuario"
     }
   }
 }

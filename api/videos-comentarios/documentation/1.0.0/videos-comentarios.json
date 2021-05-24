@@ -538,7 +538,7 @@
           "comentario": {
             "type": "string"
           },
-          "video": {
+          "videos_usuario": {
             "required": [
               "id"
             ],
@@ -546,31 +546,19 @@
               "id": {
                 "type": "string"
               },
-              "titulo": {
-                "type": "string"
+              "visto": {
+                "type": "boolean"
               },
-              "descripcion": {
+              "usuario": {
                 "type": "string"
               },
               "video": {
                 "type": "string"
               },
-              "curso": {
-                "type": "string"
-              },
-              "precio": {
+              "calificacion": {
                 "type": "number"
               },
-              "videos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "portada": {
-                "type": "string"
-              },
-              "comentarios": {
+              "videos_comentarios": {
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -598,7 +586,7 @@
           "comentario": {
             "type": "string"
           },
-          "video": {
+          "videos_usuario": {
             "type": "string"
           },
           "published_at": {
