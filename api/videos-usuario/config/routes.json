@@ -47,6 +47,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "PUT",
+      "path": "/videos-usuarios/video/:id",
+      "handler": "videos-usuario.createOrUpdateVistoCalificacion",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

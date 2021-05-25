@@ -88,15 +88,29 @@
       "via": "usuario"
     },
     "videos_usuarios": {
-      "via": "usuario",
-      "collection": "videos-usuario"
+      "collection": "videos-usuario",
+      "via": "usuario"
     },
     "customerId": {
       "type": "string"
     },
     "dispositivos": {
-      "via": "user",
-      "collection": "dispositivos"
+      "collection": "dispositivos",
+      "via": "user"
+    },
+    "cursos": {
+      "collection": "cursos",
+      "via": "users",
+      "dominant": true
+    },
+    "imagenPerfil": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false
     }
   }
 }

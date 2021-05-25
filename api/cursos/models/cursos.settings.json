@@ -29,6 +29,11 @@
     "videos": {
       "via": "curso",
       "collection": "videos"
+    },
+    "users": {
+      "via": "cursos",
+      "plugin": "users-permissions",
+      "collection": "user"
     }
   }
 }

@@ -697,6 +697,15 @@
                   "type": "string"
                 }
               },
+              "cursos": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imagenPerfil": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -789,6 +798,15 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "cursos": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "imagenPerfil": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"
