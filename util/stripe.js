@@ -1,5 +1,15 @@
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
+async function createPay({CUSTOMER_ID, AMOUNT}){
+    const intent = await stripe.paymentIntents.create({
+        amount: AMOUNT * 100,
+        currency: 'MXN',
+        customer: CUSTOMER_ID
+    });
+
+    return intent.client_secret
+}
+
 async function pay({CUSTOMER_ID, AMOUNT, PAYMENT_METHOD_ID}){
     const intent = await stripe.paymentIntents.create({
         amount: AMOUNT * 100,
@@ -7,8 +17,7 @@ async function pay({CUSTOMER_ID, AMOUNT, PAYMENT_METHOD_ID}){
         customer: CUSTOMER_ID,
         payment_method: PAYMENT_METHOD_ID,
         payment_method_types: ['card'],
-        //confirm: true,
-        //setup_future_usage: 'off_session'
+        confirm: true,
     });
     if(intent.status === 'succeeded'){
         return intent
@@ -39,6 +48,7 @@ async function generateCustomerId({CUSTOMER_EMAIL}){
 }
 
 module.exports = {
+    createPay,
     pay,
     getCustomerCards,
     generateCustomerId

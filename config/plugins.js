@@ -9,4 +9,7 @@ module.exports = {
         tracing: false,
       },
     },
+    email: {
+      provider: 'custome-mailer',
+    },
 };

@@ -118,3 +118,5 @@ exports
 ############################
 keys
 extensions/documentation/documentation/*
+providers/strapi-provider-email-custome-mailer/node_modules
+providers/strapi-provider-email-custome-mailer/package-lock.json

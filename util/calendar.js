@@ -1,16 +1,16 @@
-const CALENDAR_ID = process.env.CALENDAR_ID
+//const CALENDAR_ID = process.env.CALENDAR_ID
+const CALENDAR_ID = "yepezaylin24@gmail.com"
 const EMAIL_G_SUITE = process.env.EMAIL_G_SUITE
 const {google} = require('googleapis');
-let privatekey = require("../keys/googleCredentials.json");
+let privatekey = require("../keys/googleCalendarKey.json");
 
 async function getGoogleCalendar(){
     let jwtClient = new google.auth.JWT({
         email: privatekey.client_email,
         key: privatekey.private_key,
         scopes:['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'],
-        subject: EMAIL_G_SUITE
+        //subject: EMAIL_G_SUITE
     })
-    
     try{
         const r = await jwtClient.authorize()
         return google.calendar({version: 'v3', auth: jwtClient})
@@ -19,8 +19,8 @@ async function getGoogleCalendar(){
     }
 }
 
+
 async function getBusyHours({startDatetime, endDatetime}){
-    /*
     try{
         const calendar = await getGoogleCalendar();
         const res = await calendar.freebusy.query({
@@ -35,12 +35,11 @@ async function getBusyHours({startDatetime, endDatetime}){
         return res.data.calendars[CALENDAR_ID].busy
     }catch(error){
         throw new Error(error)
-    }*/
-    return []
+    }
 }
 
 async function createEvent({title, description, startDatetime, endDatetime, attendeeEmail}){
-    /*
+    
     const event = {
         summary: title,
         description: description,
@@ -51,6 +50,7 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
         end: {
             dateTime: endDatetime
         },
+        /*
         conferenceData:{
             createRequest:{
                 requestId: "cesarVegaKey",
@@ -64,20 +64,17 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
             {
                 email: attendeeEmail
             },
-        ]
+        ]*/
     };
     const calendar = await getGoogleCalendar();
-    return calendar.events.insert({
+    
+    const a = await calendar.events.insert({
         calendarId: CALENDAR_ID, 
         conferenceDataVersion: 1,
         resource: event
     })
-    */
-    return {
-        data: {
-            hangoutLink: 'https://meet.google.com/rnt-gpgs-pbu'
-        }
-    }
+    a.data.hangoutLink = 'https://meet.google.com/rnt-gpgs-pbu'
+    return a;
 }
 
 module.exports = {

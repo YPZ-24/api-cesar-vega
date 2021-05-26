@@ -23,6 +23,9 @@ module.exports = {
       /*Get data from authenticated user*/
       const {id, email} = ctx.state.user;
       try{
+        const {customerId} = await strapi.query('user', 'users-permissions').findOne({ id })
+        if(customerId) return ctx.badRequest('customerId ya existe') 
+
         //Create customerId with Stripe
         const customer = await generateCustomerId({CUSTOMER_EMAIL: email})
         //Assign customerId to user

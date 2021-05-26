@@ -18,9 +18,7 @@ async function sendEmail( {message, receiver, subject }){
     }catch(error){
         console.log(error)
         throw new Error(error)
-    }  
-        //.then(()=>resolve(true))
-        //.catch(()=>{reject(createError({message:'Error al enviar mensaje de recuperación', error:EMAIL_API, httpCode:500}))})
+    }
 }
 
 module.exports = {

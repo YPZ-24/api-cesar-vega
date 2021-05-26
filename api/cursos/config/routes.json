@@ -55,6 +55,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "POST",
+      "path": "/cursos/:id/pay",
+      "handler": "cursos.createPayCurso",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

@@ -24,6 +24,7 @@
     "strapi-plugin-graphql": "^3.5.4",
     "strapi-plugin-upload": "3.5.4",
     "strapi-plugin-users-permissions": "3.5.4",
+    "strapi-provider-email-custome-mailer": "file:providers/strapi-provider-email-custome-mailer",
     "strapi-utils": "3.5.4",
     "stripe": "^8.148.0"
   },
