@@ -4,6 +4,27 @@ const {sendEmail} = require('../../../util/mailer')
 
 module.exports = {
 
+    async findBusyHours(ctx) {
+        /*Get data from params*/
+        const { timeMin, timeMax } = ctx.params;
+        const startDatetime = new Date(timeMin)
+        const endDatetime = new Date(timeMax)
+        /*Validations*/
+        if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
+        
+        /*Connect with google calendar and get freebusy hours*/
+        try{
+            const busyHours = await getBusyHours({startDatetime, endDatetime})
+            return response = {
+                statusCode: 200,
+                "busyHours": busyHours
+            }
+        }catch(error){
+            console.log(error)
+            return ctx.serverUnavailable('Error al conectar con Calendar');
+        }
+    },
+
     async findFreeHourRanges(ctx) {
         /*Get data from params*/
         const { day } = ctx.params;

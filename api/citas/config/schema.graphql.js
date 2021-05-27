@@ -13,6 +13,10 @@ module.exports = {
             start: DateTime
             end: DateTime
         },
+        type findBusyHoursPayload {
+            statusCode: Int
+            busyHours: [HourRange]
+        },
         type findFreeHourRangesPayload {
             statusCode: Int
             freeHourRanges: [HourRange]
@@ -44,6 +48,7 @@ module.exports = {
     `,
     query: `
         findFreeHourRanges(day: String!): findFreeHourRangesPayload
+        findBusyHours(timeMin: String!, timeMax: String!): findBusyHoursPayload
     `,
     resolver: {
         Mutation: {
@@ -71,6 +76,14 @@ module.exports = {
                 resolver: async (obj, opt, { context }) => {
                     context.params = getStrapiParams(context.params)
                     return await strapi.controllers.citas.findFreeHourRanges(context)
+                },
+            },
+            findBusyHours: {
+                description: 'Find Admin busy hours on Google Calendar',
+                resolverOf: 'application::citas.citas.findBusyHours',
+                resolver: async (obj, opt, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.citas.findBusyHours(context)
                 },
             },
         },
