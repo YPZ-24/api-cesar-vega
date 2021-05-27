@@ -9,13 +9,13 @@ module.exports = {
         input addCitaToScheduleInput {
             where : InputID
         },
-        type BusyHour{
-            start: String
-            end: String
+        type HourRange{
+            start: DateTime
+            end: DateTime
         },
-        type findBusyHoursPayload {
+        type findFreeHourRangesPayload {
             statusCode: Int
-            busyHours: [BusyHour]
+            freeHourRanges: [HourRange]
         },
         input payCita{
             id: ID!,
@@ -38,7 +38,7 @@ module.exports = {
         sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload
     `,
     query: `
-        findBusyHours(timeMin: String!, timeMax: String!): findBusyHoursPayload
+        findFreeHourRanges(day: String!): findFreeHourRangesPayload
     `,
     resolver: {
         Mutation: {
@@ -60,12 +60,12 @@ module.exports = {
             }
         },
         Query: {
-            findBusyHours: {
+            findFreeHourRanges: {
                 description: 'Find Admin busy hours on Google Calendar',
-                resolverOf: 'application::citas.citas.findBusyHours',
+                resolverOf: 'application::citas.citas.findFreeHourRanges',
                 resolver: async (obj, opt, { context }) => {
                     context.params = getStrapiParams(context.params)
-                    return await strapi.controllers.citas.findBusyHours(context)
+                    return await strapi.controllers.citas.findFreeHourRanges(context)
                 },
             },
         },

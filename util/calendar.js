@@ -38,6 +38,70 @@ async function getBusyHours({startDatetime, endDatetime}){
     }
 }
 
+//getFreeRanges({startDatetime: new Date('2021-05-27'), endDatetime: new Date('2021-05-28')})
+
+async function getFreeRanges({startDatetime, endDatetime, duration}){
+    try{
+        const busyHours = await getBusyHours({startDatetime, endDatetime})
+        const freeHours = getFreeHours({startDatetime, endDatetime, busyHours})
+        let ranges = [];
+        let eDatetime = new Date(startDatetime)
+        let sDatetime = new Date(startDatetime)
+        eDatetime.setMinutes(sDatetime.getMinutes() + duration)
+        freeHours.forEach((fh, i)=>{
+            while(eDatetime<=fh.end){
+                ranges.push({
+                    start: sDatetime,
+                    end: eDatetime
+                })
+                eDatetime = new Date(eDatetime)
+                sDatetime = new Date(eDatetime)
+                eDatetime.setMinutes(sDatetime.getMinutes() + duration)
+            }
+            eDatetime = new Date(freeHours[i+1] ? freeHours[i+1].start: null)
+            sDatetime = new Date(freeHours[i+1] ? freeHours[i+1].start: null)
+            eDatetime.setMinutes(sDatetime.getMinutes() + duration)
+        })
+        return ranges;
+    }catch(error){
+        throw new Error(error)
+    }
+}
+
+function getFreeHours({startDatetime, endDatetime, busyHours}){
+    let ranges = []
+    if(busyHours.length===0){
+        ranges.push({
+            start: new Date(startDatetime),
+            end: new Date(endDatetime)
+        })
+    }else{
+        let sDatetime = new Date(startDatetime)
+        let eDatetime = new Date(busyHours[0] ? busyHours[0].start : endDatetime)
+        for(let i=0; (i<= busyHours.length) && (eDatetime<endDatetime); i++){
+            ranges.push({
+                start: sDatetime,
+                end: eDatetime
+            })
+            
+            sDatetime = new Date(busyHours[i].end)
+            eDatetime = new Date(busyHours[i+1] ? busyHours[i+1].start : endDatetime)
+            ranges.push({
+                start: sDatetime,
+                end: eDatetime
+            })
+
+            sDatetime = new Date(busyHours[i+1] ? busyHours[i+1].end : null)
+            eDatetime = new Date(busyHours[i+2] ? busyHours[i+2].start : endDatetime)
+        }
+        ranges.push({
+            start: new Date(busyHours[busyHours.length-1].end),
+            end: endDatetime
+        })
+    }
+    return ranges;
+}
+
 async function createEvent({title, description, startDatetime, endDatetime, attendeeEmail}){
     
     const event = {
@@ -80,5 +144,6 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
 module.exports = {
     getGoogleCalendar,
     getBusyHours,
-    createEvent
+    createEvent,
+    getFreeRanges
 }

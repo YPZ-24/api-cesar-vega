@@ -50,8 +50,8 @@
     },
     {
       "method": "GET",
-      "path": "/citas/busyHours/:timeMin/:timeMax",
-      "handler": "citas.findBusyHours",
+      "path": "/citas/findFreeHourRanges/:day",
+      "handler": "citas.findFreeHourRanges",
       "config": {
         "policies": []
       }

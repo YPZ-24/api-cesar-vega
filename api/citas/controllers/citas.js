@@ -1,23 +1,22 @@
-const {getBusyHours, createEvent} = require('../../../util/calendar')
+const {getBusyHours, createEvent, getFreeRanges} = require('../../../util/calendar')
 const {pay} = require('../../../util/stripe')
 const {sendEmail} = require('../../../util/mailer')
 
 module.exports = {
 
-    async findBusyHours(ctx) {
+    async findFreeHourRanges(ctx) {
         /*Get data from params*/
-        const { timeMin, timeMax } = ctx.params;
-        const startDatetime = new Date(timeMin)
-        const endDatetime = new Date(timeMax)
-        /*Validations*/
-        if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
-        
-        /*Connect with google calendar and get freebusy hours*/
+        const { day } = ctx.params;
+        const dayDate = (new Date(day)).toISOString().split('T')[0]
+        const {horaMaxima, horaMinima, duracion} = await strapi.services['config-asesoria'].find()
+        const endWorking = new Date(`${dayDate}T${horaMaxima}z`);
+        const startWorking = new Date(`${dayDate}T${horaMinima}z`);
+
         try{
-            const busyHours = await getBusyHours({startDatetime, endDatetime})
+            const freeHourRanges = await getFreeRanges({startDatetime: startWorking, endDatetime: endWorking, duration: duracion})
             return response = {
                 statusCode: 200,
-                "busyHours": busyHours
+                freeHourRanges
             }
         }catch(error){
             console.log(error)
@@ -40,6 +39,7 @@ module.exports = {
         eDatetime.setMinutes(sDatetime.getMinutes() + duracion)
         try{
             /*Validations*/
+            if(sDatetime<(new Date())) return ctx.badRequest('No puedes agendar en el pasado')
             const busyHours = await getBusyHours({startDatetime: sDatetime, endDatetime: eDatetime})
             if(busyHours.length != 0){
                 return ctx.serverUnavailable('Este horario ya esta en ocupado');

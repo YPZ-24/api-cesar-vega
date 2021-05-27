@@ -511,7 +511,7 @@
         ]
       }
     },
-    "/citas/busyHours/{timeMin}/{timeMax}": {
+    "/citas/findFreeHourRanges/{day}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -567,17 +567,7 @@
         ],
         "parameters": [
           {
-            "name": "timeMin",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "timeMax",
+            "name": "day",
             "in": "path",
             "description": "",
             "deprecated": false,
