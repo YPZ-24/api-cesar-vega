@@ -6,8 +6,6 @@ module.exports = {
         return {
             send: async options => {
                 const {to, subject, text} = options
-                console.log(text)
-                /*
                 try{
                     await axios({
                         method: 'POST',
@@ -24,8 +22,7 @@ module.exports = {
                 }catch(error){
                     console.log(error)
                     throw new Error(error)
-                }*/
-
+                }
             },
         };
     },

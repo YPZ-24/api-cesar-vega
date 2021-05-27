@@ -19,10 +19,15 @@ module.exports = {
         },
         input payCita{
             id: ID!,
-            idPaymentMethod: ID!
+            idPaymentMethod: ID
         },
         input payCitaInput {
             where : payCita
+        },
+        type payCitaPayload{
+            statusCode: Int,
+            clientSecret: String,
+            message: String
         },
         type customeGenericPayload {
             statusCode: Int,
@@ -34,7 +39,7 @@ module.exports = {
     `,
     mutation: `
         addCitaToSchedule(input: addCitaToScheduleInput): addCitaToSchedulePayload,
-        payCita(input: payCitaInput) : customeGenericPayload,
+        payCita(input: payCitaInput): payCitaPayload,
         sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload
     `,
     query: `

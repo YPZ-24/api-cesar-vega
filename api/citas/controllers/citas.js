@@ -1,5 +1,5 @@
 const {getBusyHours, createEvent, getFreeRanges} = require('../../../util/calendar')
-const {pay} = require('../../../util/stripe')
+const {pay, createPay} = require('../../../util/stripe')
 const {sendEmail} = require('../../../util/mailer')
 
 module.exports = {
@@ -76,15 +76,25 @@ module.exports = {
         const {costo} = await strapi.services['config-asesoria'].find()
         
         try{
+            let message = '';
+            let clientSecret = ''
             //Pay with stripe
-            await pay({CUSTOMER_ID: customerId, AMOUNT: costo, PAYMENT_METHOD_ID: idPaymentMethod})
-            
+            if(idPaymentMethod) {
+                await pay({CUSTOMER_ID: customerId, AMOUNT: costo, PAYMENT_METHOD_ID: idPaymentMethod})
+                message = 'Pago exitoso'
+            }
+            else {
+                clientSecret = await createPay({CUSTOMER_ID: customerId, AMOUNT: costo})
+                message = 'Client Secret creado'
+            }
+
             //Update STATUS = PAGADA
-            await strapi.services.citas.update({ id }, {status: "PAGADA"});
+            //await strapi.services.citas.update({ id }, {status: "PAGADA"});
 
             return {
                 statusCode: 200,
-                message: 'Pago existoso'
+                clientSecret: clientSecret,
+                message
             }
         }catch(error){
             console.log(error)
@@ -99,12 +109,12 @@ module.exports = {
         const {enlace, usuario, asunto} = await strapi.services.citas.findOne({ id });
         /*Sending email with cita conference link*/
         try{
-            /*
+            
             await sendEmail( {
                 message: `${asunto}, Link para sesión: ${enlace}`, 
                 receiver: usuario.email, 
                 subject: "CESAR VEGA | ASESORIA" 
-            })*/
+            })
             return {
                 statusCode: 200,
                 message: "Link para asesoría enviado"

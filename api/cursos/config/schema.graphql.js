@@ -4,25 +4,19 @@ module.exports = {
     definition: `
         input payCurso{
             id: ID!,
-            idPaymentMethod: ID!
+            idPaymentMethod: ID
         },
         input payCursoInput {
             where : payCurso
         },
-        input createPayCurso{
-            id: ID!,
-        },
-        input createPayCursoInput {
-            where : createPayCurso
-        },
-        type createPayCursoPayload {
+        type payCursoPayload{
             statusCode: Int,
-            clientSecret: String
+            clientSecret: String,
+            message: String
         }
     `,
     mutation: `
-        payCurso(input: payCursoInput) : customeGenericPayload,
-        createPayCurso(input: createPayCursoInput) : createPayCursoPayload,
+        payCurso(input: payCursoInput) : payCursoPayload
     `,
     resolver: {
         Mutation: {
@@ -32,14 +26,6 @@ module.exports = {
                 resolver: async (obj, options, { context }) => {
                     context.params = getStrapiParams(context.params)
                     return await strapi.controllers.cursos.payCurso(context)
-                },
-            },
-            createPayCurso:{
-                description: 'Create pay curso',
-                resolverOf: 'application::cursos.cursos.createPayCurso',
-                resolver: async (obj, options, { context }) => {
-                    context.params = getStrapiParams(context.params)
-                    return await strapi.controllers.cursos.createPayCurso(context)
                 },
             }
         }
