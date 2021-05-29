@@ -685,12 +685,6 @@
                   "type": "string"
                 }
               },
-              "contrataciones": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "videos_usuarios": {
                 "type": "array",
                 "items": {

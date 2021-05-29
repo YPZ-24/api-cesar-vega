@@ -1,5 +1,4 @@
-//const CALENDAR_ID = process.env.CALENDAR_ID
-const CALENDAR_ID = "yepezaylin24@gmail.com"
+const CALENDAR_ID = process.env.CALENDAR_ID
 const EMAIL_G_SUITE = process.env.EMAIL_G_SUITE
 const {google} = require('googleapis');
 let privatekey = require("../keys/googleCalendarKey.json");
@@ -23,6 +22,7 @@ async function getGoogleCalendar(){
 async function getBusyHours({startDatetime, endDatetime}){
     try{
         const calendar = await getGoogleCalendar();
+        
         const res = await calendar.freebusy.query({
             resource: {
                 timeMin: startDatetime,

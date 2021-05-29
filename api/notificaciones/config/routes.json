@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/contratacions",
-      "handler": "contratacion.find",
+      "path": "/notificaciones",
+      "handler": "notificaciones.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/contratacions/count",
-      "handler": "contratacion.count",
+      "path": "/notificaciones/count",
+      "handler": "notificaciones.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/contratacions/:id",
-      "handler": "contratacion.findOne",
+      "path": "/notificaciones/:id",
+      "handler": "notificaciones.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/contratacions",
-      "handler": "contratacion.create",
+      "path": "/notificaciones",
+      "handler": "notificaciones.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/contratacions/:id",
-      "handler": "contratacion.update",
+      "path": "/notificaciones/:id",
+      "handler": "notificaciones.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/contratacions/:id",
-      "handler": "contratacion.delete",
+      "path": "/notificaciones/:id",
+      "handler": "notificaciones.delete",
       "config": {
         "policies": []
       }

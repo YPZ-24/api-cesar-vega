@@ -83,10 +83,6 @@
       "collection": "citas",
       "via": "usuario"
     },
-    "contrataciones": {
-      "collection": "contratacion",
-      "via": "usuario"
-    },
     "videos_usuarios": {
       "collection": "videos-usuario",
       "via": "usuario"

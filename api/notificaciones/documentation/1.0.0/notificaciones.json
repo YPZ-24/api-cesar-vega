@@ -1,18 +1,18 @@
 {
   "paths": {
-    "/contratacions": {
+    "/notificaciones": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find all the notificaciones's records",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve notificaciones document(s)",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Contratacion"
+                    "$ref": "#/components/schemas/Notificaciones"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "parameters": [
           {
@@ -194,14 +194,14 @@
       },
       "post": {
         "deprecated": false,
-        "description": "Create a new record",
+        "description": "Create a new notificaciones record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve notificaciones document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
+                  "$ref": "#/components/schemas/Notificaciones"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "requestBody": {
           "description": "",
@@ -247,20 +247,20 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContratacion"
+                "$ref": "#/components/schemas/NewNotificaciones"
               }
             }
           }
         }
       }
     },
-    "/contratacions/count": {
+    "/notificaciones/count": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Retrieve the numver of notificaciones documents",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve notificaciones document(s)",
             "content": {
               "application/json": {
                 "schema": {
@@ -306,22 +306,22 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "parameters": []
       }
     },
-    "/contratacions/{id}": {
+    "/notificaciones/{id}": {
       "get": {
         "deprecated": false,
-        "description": "",
+        "description": "Find one notificaciones record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve notificaciones document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
+                  "$ref": "#/components/schemas/Notificaciones"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "parameters": [
           {
@@ -376,14 +376,14 @@
       },
       "put": {
         "deprecated": false,
-        "description": "Update a record",
+        "description": "Update a single notificaciones record",
         "responses": {
           "200": {
-            "description": "response",
+            "description": "Retrieve notificaciones document(s)",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contratacion"
+                  "$ref": "#/components/schemas/Notificaciones"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewContratacion"
+                "$ref": "#/components/schemas/NewNotificaciones"
               }
             }
           }
@@ -449,10 +449,10 @@
       },
       "delete": {
         "deprecated": false,
-        "description": "Delete a record",
+        "description": "Delete a single notificaciones record",
         "responses": {
           "200": {
-            "description": "deletes a single record based on the ID supplied",
+            "description": "deletes a single notificaciones based on the ID supplied",
             "content": {
               "application/json": {
                 "schema": {
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Contratacion"
+          "Notificaciones"
         ],
         "parameters": [
           {
@@ -514,7 +514,7 @@
   },
   "components": {
     "schemas": {
-      "Contratacion": {
+      "Notificaciones": {
         "required": [
           "id"
         ],
@@ -522,109 +522,10 @@
           "id": {
             "type": "string"
           },
-          "usuario": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "edad": {
-                "type": "integer"
-              },
-              "fechaNacimiento": {
-                "type": "string"
-              },
-              "telefono": {
-                "type": "integer"
-              },
-              "saldo": {
-                "type": "number"
-              },
-              "codigos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "codigoReferido": {
-                "type": "string"
-              },
-              "citas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "contrataciones": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "videos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "customerId": {
-                "type": "string"
-              },
-              "dispositivos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "cursos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "imagenPerfil": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
+          "titulo": {
+            "type": "string"
           },
-          "asunto": {
+          "contenido": {
             "type": "string"
           },
           "published_at": {
@@ -633,12 +534,12 @@
           }
         }
       },
-      "NewContratacion": {
+      "NewNotificaciones": {
         "properties": {
-          "usuario": {
+          "titulo": {
             "type": "string"
           },
-          "asunto": {
+          "contenido": {
             "type": "string"
           },
           "published_at": {
@@ -657,7 +558,7 @@
   },
   "tags": [
     {
-      "name": "Contratacion"
+      "name": "Notificaciones"
     }
   ]
 }

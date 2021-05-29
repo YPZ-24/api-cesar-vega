@@ -26,7 +26,7 @@ module.exports = {
                 if(codeFinded.length===0){
                     await strapi.services.codigos.create({codigo: code, usuarioPropietario: id, usuarioReferido});
                     return {
-                        status: 200,
+                        statusCode: 200,
                         code
                     }
                 }

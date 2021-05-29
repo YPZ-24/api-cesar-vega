@@ -134,7 +134,7 @@ module.exports = {
             await sendEmail( {
                 message: `${asunto}, Link para sesión: ${enlace}`, 
                 receiver: usuario.email, 
-                subject: "CESAR VEGA | ASESORIA" 
+                subject: "Cesar Vega | Asesoría" 
             })
             return {
                 statusCode: 200,
