@@ -8,7 +8,8 @@ module.exports = {
             last4: String
         },
         type getPaymentMethodsPayload{
-            statusCode: Int!
+            message: String
+            statusCode: Int
             cards: [Card]
         }
     `,

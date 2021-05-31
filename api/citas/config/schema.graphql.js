@@ -2,10 +2,6 @@ const {getStrapiParams} = require('../../../util/graphParams')
 
 module.exports = {
     definition: `
-        type addCitaToSchedulePayload {
-            statusCode: Int
-            message: String
-        },
         input addCitaToScheduleInput {
             where : InputID
         },
@@ -14,10 +10,12 @@ module.exports = {
             end: DateTime
         },
         type findBusyHoursPayload {
+            message: String
             statusCode: Int
             busyHours: [HourRange]
         },
         type findFreeHourRangesPayload {
+            message: String
             statusCode: Int
             freeHourRanges: [HourRange]
         },
@@ -42,7 +40,7 @@ module.exports = {
         }
     `,
     mutation: `
-        addCitaToSchedule(input: addCitaToScheduleInput): addCitaToSchedulePayload,
+        addCitaToSchedule(input: addCitaToScheduleInput): customeGenericPayload,
         payCita(input: payCitaInput): payCitaPayload,
         sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload
     `,

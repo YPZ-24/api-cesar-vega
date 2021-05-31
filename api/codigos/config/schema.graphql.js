@@ -10,6 +10,7 @@ module.exports = {
             data: createCodigo
         },
         type createCodigoPayloadC{
+            message: String,
             statusCode: Int,
             code: String
         }

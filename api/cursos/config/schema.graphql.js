@@ -10,9 +10,9 @@ module.exports = {
             where : payCurso
         },
         type payCursoPayload{
-            statusCode: Int,
-            clientSecret: String,
             message: String
+            statusCode: Int
+            clientSecret: String
         }
     `,
     mutation: `
