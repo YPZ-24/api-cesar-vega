@@ -1,6 +1,7 @@
 const {getBusyHours, createEvent, getFreeRanges} = require('../../../util/calendar')
 const {pay, createPay} = require('../../../util/stripe')
 const {sendEmail} = require('../../../util/mailer')
+const GraphqlError = require('../../../util/errorHandler')
 
 module.exports = {
 
@@ -10,7 +11,7 @@ module.exports = {
         const startDatetime = new Date(timeMin)
         const endDatetime = new Date(timeMax)
         /*Validations*/
-        if(!(startDatetime<endDatetime)) return ctx.badRequest("'timeMin' debe ser menor que 'timeMax'")
+        if(!(startDatetime<endDatetime)) return new GraphqlError("El rango solicitado no es válido", 400) 
         
         /*Connect with google calendar and get freebusy hours*/
         try{
@@ -21,7 +22,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Error al conectar con Calendar');
+            return new GraphqlError('Error al conectar con Calendar', 503) 
         }
     },
 
@@ -41,7 +42,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Error al conectar con Calendar');
+            return new GraphqlError('Error al conectar con Calendar', 503) 
         }
     },
 
@@ -60,10 +61,10 @@ module.exports = {
         eDatetime.setMinutes(sDatetime.getMinutes() + duracion)
         try{
             /*Validations*/
-            if(sDatetime<(new Date())) return ctx.badRequest('No puedes agendar en el pasado')
+            if(sDatetime<(new Date())) return new GraphqlError('Elige una fecha de hoy en adelante', 400) 
             const busyHours = await getBusyHours({startDatetime: sDatetime, endDatetime: eDatetime})
             if(busyHours.length != 0){
-                return ctx.serverUnavailable('Este horario ya esta en ocupado');
+                return new GraphqlError('Este horario ya esta ocupado', 503) 
             }else{
                 /*Create Google Calendar Event*/
                 const {data} = await createEvent({
@@ -84,7 +85,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.serverUnavailable('Error al conectar con Calendar');
+            return new GraphqlError('Error al conectar con Calendar', 503) 
         }
     },
 
@@ -109,9 +110,6 @@ module.exports = {
                 message = 'Client Secret creado'
             }
 
-            //Update STATUS = PAGADA
-            //await strapi.services.citas.update({ id }, {status: "PAGADA"});
-
             return {
                 statusCode: 200,
                 clientSecret: clientSecret,
@@ -119,7 +117,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.badImplementation('Error al realizar el pago') 
+            return new GraphqlError('Error al realizar pago', 500) 
         }
     },
     
@@ -142,7 +140,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.badImplementation('Ocurrio un error al enviar email')
+            return new GraphqlError('Ocurrio un error el enlace por correo', 503) 
         }
     }
 

@@ -2,7 +2,8 @@
   "kind": "singleType",
   "collectionName": "config_referidos",
   "info": {
-    "name": "ConfigReferidos"
+    "name": "ConfigReferidos",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,6 +12,9 @@
   },
   "attributes": {
     "saldo": {
+      "type": "integer"
+    },
+    "maxReferidos": {
       "type": "integer"
     }
   }

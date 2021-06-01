@@ -1,8 +1,19 @@
-'use strict';
+module.exports = {
 
-/**
- * Read the documentation (https://strapi.io/documentation/developer-docs/latest/development/backend-customization.html#core-controllers)
- * to customize this controller
- */
+    async findCurrentEvents(ctx){
+        const events = await strapi.services.eventos.find()
+        const currentEvents = events.filter(n => {
+            const nDate = new Date(n.fecha)
+            const now = new Date()
+            now.setDate(now.getDate() - 1)
+            if(nDate>now){
+                return n
+            }
+        });
+        return {
+            statusCode: 200,
+            currentEvents
+        }
+    }
 
-module.exports = {};
+};

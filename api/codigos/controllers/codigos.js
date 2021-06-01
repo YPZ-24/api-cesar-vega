@@ -1,4 +1,5 @@
 const {generateCode} = require('../../../util/code')
+const GraphqlError = require('../../../util/errorHandler')
 
 module.exports = {
 
@@ -8,14 +9,15 @@ module.exports = {
         /*Get data from body*/
         const {usuarioReferido} = ctx.request.body
         try{
+            const {maxReferidos} = await strapi.services['config-referidos'].find()
             /*Validations*/
             const userCodes = await strapi.services.codigos.find({usuarioPropietario: id});
-            if(userCodes.length>=4) return ctx.badRequest('Ya no puedes crear más códigos')
-            if(id===usuarioReferido) return ctx.badRequest('No puedes referirte un código a ti')
+            if(userCodes.length>=maxReferidos)  return new GraphqlError('Ya no puedes crear más códigos', 400)
+            if(id===usuarioReferido) return new GraphqlError('No puedes referiste un código a ti mismo', 400)
             const usrReferidoFinded = await strapi.query('user', 'users-permissions').findOne({ id: usuarioReferido })
-            if(!usrReferidoFinded) return ctx.badRequest('No existe el usuario a referir')
-            const codeUserExists = userCodes.filter(uc =>  uc.usuarioReferido.id === usuarioReferido)
-            if(codeUserExists.length!==0) return ctx.badRequest('Ya creaste un código para ese usuario')
+            if(!usrReferidoFinded) return new GraphqlError('No existe el usuario a referir', 400)
+            const codeUserExists = userCodes.filter(uc => { if(uc.usuarioReferido){ return uc.usuarioReferido.id === usuarioReferido} })
+            if(codeUserExists.length!==0) return new GraphqlError('Ya creaste un código para este usuario', 400)
             
             /*Generate Code*/
             let codeFinded;
@@ -33,10 +35,10 @@ module.exports = {
                 conta++;
             }while(codeFinded!==0 && conta<=20)
             console.log(new Error('Demasiados intentos para crear el código'))
-            return ctx.badImplementation('Error al crear código')
+            return new GraphqlError('Error al crear código', 500) 
         }catch(error){
             console.log(error)
-            return ctx.badImplementation('Algo salio mal')
+            return new GraphqlError() 
         }
     },
 
@@ -46,8 +48,8 @@ module.exports = {
         try{
             /*Validations*/
             const code = await strapi.services.codigos.findOne({id});
-            if(!code) return ctx.badRequest('No existe el código')
-            if(code.usado) return ctx.badRequest('Este código ya fue usado')
+            if(!code)  return new GraphqlError('No existe el código', 400) 
+            if(code.usado)  return new GraphqlError('El código ya fue usado', 400) 
             /*Change usado state*/
             await strapi.services.codigos.update({id}, {usado: true});
             /*Send saldo to usuarioPropietario*/
@@ -66,7 +68,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.badImplementation('Algo salio mal')
+            return new GraphqlError() 
         }
         
     }

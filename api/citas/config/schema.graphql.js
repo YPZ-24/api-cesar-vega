@@ -10,12 +10,10 @@ module.exports = {
             end: DateTime
         },
         type findBusyHoursPayload {
-            message: String
             statusCode: Int
             busyHours: [HourRange]
         },
         type findFreeHourRangesPayload {
-            message: String
             statusCode: Int
             freeHourRanges: [HourRange]
         },

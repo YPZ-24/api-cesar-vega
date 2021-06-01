@@ -15,7 +15,7 @@ module.exports = {
         }
       }catch(error){
         console.log(error)
-        return ctx.badImplementation('Error al obtener tarjetas guardadas') 
+        return new GraphqlError("Error al obtener tarjetas guardadas",5400) 
       }
   },
 
@@ -24,7 +24,7 @@ module.exports = {
       const {id, email} = ctx.state.user;
       try{
         const {customerId} = await strapi.query('user', 'users-permissions').findOne({ id })
-        if(customerId) return ctx.badRequest('customerId ya existe') 
+        if(customerId) return new GraphqlError("CustomId ya existe", 400)
 
         //Create customerId with Stripe
         const customer = await generateCustomerId({CUSTOMER_EMAIL: email})
@@ -36,7 +36,7 @@ module.exports = {
         }
       }catch(error){
         console.log(error)
-        return ctx.badImplementation('Error al crear cliente') 
+        return new GraphqlError("Error al crear cliente", 500) 
       }
   },
 

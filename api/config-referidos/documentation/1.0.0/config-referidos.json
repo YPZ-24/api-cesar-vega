@@ -326,6 +326,9 @@
           "saldo": {
             "type": "integer"
           },
+          "maxReferidos": {
+            "type": "integer"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -335,6 +338,9 @@
       "NewConfig-referidos": {
         "properties": {
           "saldo": {
+            "type": "integer"
+          },
+          "maxReferidos": {
             "type": "integer"
           },
           "published_at": {

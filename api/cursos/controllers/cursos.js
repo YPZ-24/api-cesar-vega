@@ -1,4 +1,5 @@
 const {pay, createPay} = require('../../../util/stripe')
+const GraphqlError = require('../../../util/errorHandler')
 
 module.exports = {
 
@@ -35,7 +36,7 @@ module.exports = {
             }
         }catch(error){
             console.log(error)
-            return ctx.badImplementation('Error al realizar pago')
+            return new GraphqlError("Error al realizar pago", 500) 
         }
     }
 
