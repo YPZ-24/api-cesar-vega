@@ -44,13 +44,14 @@ module.exports = {
 
     async useCode(ctx){
         /*Get data from params*/
-        const {id} = ctx.params
+        const {codigo} = ctx.params
         try{
             /*Validations*/
-            const code = await strapi.services.codigos.findOne({id});
+            const code = await strapi.services.codigos.findOne({codigo});
             if(!code)  return new GraphqlError('No existe el código', 400) 
             if(code.usado)  return new GraphqlError('El código ya fue usado', 400) 
             /*Change usado state*/
+            const id = code.id;
             await strapi.services.codigos.update({id}, {usado: true});
             /*Send saldo to usuarioPropietario*/
             const usuarioPropietarioId = code.usuarioPropietario.id;

@@ -1,7 +1,12 @@
+const {getStrapiParams} = require('../../../util/graphParams')
+
 module.exports = {
     definition: `
         input useCodeInput{
-            where : InputID
+            where : useCode
+        },
+        input useCode{
+            codigo : String!
         },
         input createCodigo {
             usuarioReferido: ID!
@@ -22,7 +27,11 @@ module.exports = {
         Mutation: {
             useCode: {
                 description: 'Add cita to schedule',
-                resolver: 'application::codigos.codigos.useCode',
+                resolverOf: 'application::codigos.codigos.useCode',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.codigos.useCode(context)
+                },
             },
             createCodigoC: {
                 description: 'Create code to user Authenticated',
