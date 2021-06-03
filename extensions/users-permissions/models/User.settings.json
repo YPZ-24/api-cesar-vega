@@ -21,7 +21,8 @@
       "type": "email",
       "minLength": 6,
       "configurable": false,
-      "required": true
+      "required": true,
+      "unique": true
     },
     "provider": {
       "type": "string",
@@ -45,7 +46,7 @@
     },
     "confirmed": {
       "type": "boolean",
-      "default": false,
+      "default": true,
       "configurable": false
     },
     "role": {
@@ -56,7 +57,7 @@
     },
     "blocked": {
       "type": "boolean",
-      "default": true
+      "default": false
     },
     "edad": {
       "type": "integer"

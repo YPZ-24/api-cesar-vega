@@ -10,19 +10,34 @@ module.exports = {
         type getPaymentMethodsPayload{
             statusCode: Int
             cards: [Card]
-        }
+        },
+        type getProfilePayload{
+            username: String!,
+            email: String!,
+            edad: Int!,
+            fechaNacimiento: Date!,
+            telefono: String!,
+            saldo: Int!,
+            imagenPerfil: String
+        },
     `,
     mutation: `
         createCustomerId: customeGenericPayload,
+        createUserRefered(input: createUserInput): createUserPayload
     `,
     query: `
-        getPaymentMethods: getPaymentMethodsPayload
+        getPaymentMethods: getPaymentMethodsPayload,
+        getProfile(id: ID!): getProfilePayload
     `,
     resolver: {
         Mutation: {
             createCustomerId: {
                 description: 'Create a Stripe customer Id for the authenticated user',
                 resolver: 'application::user.user.createCustomerId',
+            },
+            createUserRefered: {
+                description: 'Create user as a refered user',
+                resolver: 'application::user.user.createUserRefered',
             }
         },
         Query: {
@@ -30,6 +45,10 @@ module.exports = {
                 description: 'Get user authenticated payment methods',
                 resolver: 'application::user.user.getPaymentMethods',
             },
+            getProfile: {
+                description: 'Get data to user profile',
+                resolver: 'application::user.user.getProfile',
+            }
         },
     },
 };

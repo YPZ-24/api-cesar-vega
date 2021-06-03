@@ -1,7 +1,34 @@
 const {getCustomerCards, generateCustomerId} = require('../../../util/stripe')
+const GraphqlError = require('../../../util/errorHandler');
+const { logging } = require('googleapis/build/src/apis/logging');
 
 
 module.exports = {
+
+  async getProfile(ctx){
+    const {id} = ctx.params
+    const user = await strapi.query('user', 'users-permissions').findOne({ id })
+    if(!user){
+      return new GraphqlError("Usuario no encontrado",400) 
+    }else{
+      const {username, email, edad, fechaNacimiento, telefono, saldo, imagenPerfil} = user
+      return {
+        username,
+        email,
+        edad,
+        fechaNacimiento,
+        telefono,
+        saldo,
+        imagenPerfil,
+      }
+    }
+  },
+
+  async createUserRefered(ctx){
+    const user = ctx.request.body;
+    const newUser = await strapi.query('user', 'users-permissions').create({...user, blocked: true})
+    return {user: newUser}
+  },
 
   async getPaymentMethods(ctx){
       /*Get data from authenticated user*/
@@ -15,7 +42,7 @@ module.exports = {
         }
       }catch(error){
         console.log(error)
-        return new GraphqlError("Error al obtener tarjetas guardadas",5400) 
+        return new GraphqlError("Error al obtener tarjetas guardadas",500) 
       }
   },
 

@@ -1207,7 +1207,7 @@
           },
           "confirmed": {
             "type": "boolean",
-            "default": false
+            "default": true
           },
           "role": {
             "required": [
@@ -1249,7 +1249,7 @@
           },
           "blocked": {
             "type": "boolean",
-            "default": true
+            "default": false
           },
           "edad": {
             "type": "integer"
@@ -1588,14 +1588,14 @@
           },
           "confirmed": {
             "type": "boolean",
-            "default": false
+            "default": true
           },
           "role": {
             "type": "string"
           },
           "blocked": {
             "type": "boolean",
-            "default": true
+            "default": false
           },
           "edad": {
             "type": "integer"
