@@ -8,7 +8,7 @@ module.exports = {
                 const tokens = devices.map((d)=>d.token)
                 const title = 'Nueva Inversión Disponible...!';
                 const body = data.nombre;
-                const tipo = 'INVERSIÓN';
+                const tipo = 'INVERSION';
                 const relacion = data.id;
                 await strapi.services.notificaciones.create({titulo:title, contenido:body, tipo, relacion})
                 await sendNotificationByTokens({title, body, tokens:tokens})
