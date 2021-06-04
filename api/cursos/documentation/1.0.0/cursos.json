@@ -587,7 +587,10 @@
     "schemas": {
       "Cursos": {
         "required": [
-          "id"
+          "id",
+          "nombre",
+          "imagen",
+          "descripcion"
         ],
         "properties": {
           "id": {
@@ -821,6 +824,10 @@
         }
       },
       "NewCursos": {
+        "required": [
+          "nombre",
+          "descripcion"
+        ],
         "properties": {
           "nombre": {
             "type": "string"

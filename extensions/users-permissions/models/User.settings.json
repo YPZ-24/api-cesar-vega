@@ -92,12 +92,12 @@
       "type": "string"
     },
     "dispositivos": {
-      "collection": "dispositivos",
-      "via": "user"
+      "via": "user",
+      "collection": "dispositivos"
     },
     "cursos": {
-      "collection": "cursos",
       "via": "users",
+      "collection": "cursos",
       "dominant": true
     },
     "imagenPerfil": {

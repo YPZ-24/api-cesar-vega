@@ -597,7 +597,10 @@
           },
           "curso": {
             "required": [
-              "id"
+              "id",
+              "nombre",
+              "imagen",
+              "descripcion"
             ],
             "properties": {
               "id": {

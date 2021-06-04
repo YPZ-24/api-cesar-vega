@@ -12,7 +12,8 @@
   },
   "attributes": {
     "titulo": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "descripcion": {
       "type": "text"

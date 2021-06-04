@@ -12,7 +12,8 @@
   },
   "attributes": {
     "nombre": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "imagen": {
       "model": "file",

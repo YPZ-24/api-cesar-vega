@@ -12,7 +12,9 @@
   },
   "attributes": {
     "nombre": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "imagen": {
       "collection": "file",
@@ -21,19 +23,20 @@
         "images"
       ],
       "plugin": "upload",
-      "required": false
+      "required": true
     },
     "descripcion": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "videos": {
       "via": "curso",
       "collection": "videos"
     },
     "users": {
-      "via": "cursos",
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "cursos"
     }
   }
 }

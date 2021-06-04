@@ -528,6 +528,18 @@
           "contenido": {
             "type": "string"
           },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CURSO",
+              "EVENTO",
+              "INVERSION",
+              "SEGURO"
+            ]
+          },
+          "relacion": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -540,6 +552,18 @@
             "type": "string"
           },
           "contenido": {
+            "type": "string"
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "CURSO",
+              "EVENTO",
+              "INVERSION",
+              "SEGURO"
+            ]
+          },
+          "relacion": {
             "type": "string"
           },
           "published_at": {
