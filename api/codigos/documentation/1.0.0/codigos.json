@@ -700,6 +700,9 @@
               "imagenPerfil": {
                 "type": "string"
               },
+              "cliente": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -795,6 +798,9 @@
               },
               "imagenPerfil": {
                 "type": "string"
+              },
+              "cliente": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"

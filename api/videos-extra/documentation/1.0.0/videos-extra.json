@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/videos-usuarios": {
+    "/videos-extras": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -52,7 +52,7 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
         "parameters": [
           {
@@ -244,7 +244,7 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
         "requestBody": {
           "description": "",
@@ -252,14 +252,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewVideos-usuario"
+                "$ref": "#/components/schemas/NewVideos-extra"
               }
             }
           }
         }
       }
     },
-    "/videos-usuarios/count": {
+    "/videos-extras/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -311,12 +311,12 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
         "parameters": []
       }
     },
-    "/videos-usuarios/{id}": {
+    "/videos-extras/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -368,7 +368,7 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
         "parameters": [
           {
@@ -434,7 +434,7 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
         "requestBody": {
           "description": "",
@@ -442,7 +442,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewVideos-usuario"
+                "$ref": "#/components/schemas/NewVideos-extra"
               }
             }
           }
@@ -508,91 +508,8 @@
         },
         "summary": "",
         "tags": [
-          "Videos-usuario"
+          "Videos-extra"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "",
-            "deprecated": false,
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ]
-      }
-    },
-    "/videos-usuarios/video/{id}": {
-      "put": {
-        "deprecated": false,
-        "description": "Update a record",
-        "responses": {
-          "200": {
-            "description": "response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "foo": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "",
-        "tags": [
-          "Videos-usuario"
-        ],
-        "requestBody": {
-          "description": "",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "properties": {
-                  "foo": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "name": "id",
@@ -610,7 +527,7 @@
   },
   "components": {
     "schemas": {
-      "Videos-usuario": {
+      "Videos-extra": {
         "required": [
           "id"
         ],
@@ -618,171 +535,71 @@
           "id": {
             "type": "string"
           },
-          "visto": {
-            "type": "boolean"
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "INVERSION"
+            ]
           },
-          "usuario": {
-            "required": [
-              "id",
-              "username",
-              "email"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "username": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string"
-              },
-              "provider": {
-                "type": "string"
-              },
-              "password": {
-                "type": "string"
-              },
-              "resetPasswordToken": {
-                "type": "string"
-              },
-              "confirmationToken": {
-                "type": "string"
-              },
-              "confirmed": {
-                "type": "boolean"
-              },
-              "role": {
-                "type": "string"
-              },
-              "blocked": {
-                "type": "boolean"
-              },
-              "edad": {
-                "type": "integer"
-              },
-              "fechaNacimiento": {
-                "type": "string"
-              },
-              "telefono": {
-                "type": "integer"
-              },
-              "saldo": {
-                "type": "number"
-              },
-              "codigos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "codigoReferido": {
-                "type": "string"
-              },
-              "citas": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "videos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "customerId": {
-                "type": "string"
-              },
-              "dispositivos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "cursos": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "imagenPerfil": {
-                "type": "string"
-              },
-              "cliente": {
-                "type": "boolean"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "video": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "titulo": {
-                "type": "string"
-              },
-              "descripcion": {
-                "type": "string"
-              },
-              "video": {
-                "type": "string"
-              },
-              "curso": {
-                "type": "string"
-              },
-              "precio": {
-                "type": "number"
-              },
-              "videos_usuarios": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "portada": {
-                "type": "string"
-              },
-              "published_at": {
-                "type": "string"
-              },
-              "created_by": {
-                "type": "string"
-              },
-              "updated_by": {
-                "type": "string"
-              }
-            }
-          },
-          "calificacion": {
-            "type": "number"
-          },
-          "videos_comentarios": {
+          "videos": {
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "name",
+                "hash",
+                "mime",
+                "size",
+                "url",
+                "provider"
               ],
               "properties": {
                 "id": {
                   "type": "string"
                 },
-                "comentario": {
+                "name": {
                   "type": "string"
                 },
-                "videos_usuario": {
+                "alternativeText": {
                   "type": "string"
                 },
-                "published_at": {
+                "caption": {
+                  "type": "string"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "formats": {
+                  "type": "object"
+                },
+                "hash": {
+                  "type": "string"
+                },
+                "ext": {
+                  "type": "string"
+                },
+                "mime": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "previewUrl": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "provider_metadata": {
+                  "type": "object"
+                },
+                "related": {
                   "type": "string"
                 },
                 "created_by": {
@@ -800,25 +617,13 @@
           }
         }
       },
-      "NewVideos-usuario": {
+      "NewVideos-extra": {
         "properties": {
-          "visto": {
-            "type": "boolean"
-          },
-          "usuario": {
-            "type": "string"
-          },
-          "video": {
-            "type": "string"
-          },
-          "calificacion": {
-            "type": "number"
-          },
-          "videos_comentarios": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "INVERSION"
+            ]
           },
           "published_at": {
             "type": "string",

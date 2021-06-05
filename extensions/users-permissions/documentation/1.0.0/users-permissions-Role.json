@@ -612,6 +612,9 @@
                 "imagenPerfil": {
                   "type": "string"
                 },
+                "cliente": {
+                  "type": "boolean"
+                },
                 "created_by": {
                   "type": "string"
                 },

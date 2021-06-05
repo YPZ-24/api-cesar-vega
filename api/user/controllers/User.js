@@ -26,7 +26,7 @@ module.exports = {
 
   async createUserRefered(ctx){
     const user = ctx.request.body;
-    const newUser = await strapi.query('user', 'users-permissions').create({...user, blocked: true})
+    const newUser = await strapi.query('user', 'users-permissions').create({...user, blocked: true, cliente: true})
     return {user: newUser}
   },
 

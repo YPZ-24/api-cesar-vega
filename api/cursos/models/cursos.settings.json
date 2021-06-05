@@ -34,9 +34,9 @@
       "collection": "videos"
     },
     "users": {
+      "via": "cursos",
       "plugin": "users-permissions",
-      "collection": "user",
-      "via": "cursos"
+      "collection": "user"
     }
   }
 }

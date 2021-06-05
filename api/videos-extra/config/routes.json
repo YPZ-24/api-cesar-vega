@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/videos-extras",
+      "handler": "videos-extra.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/videos-extras/count",
+      "handler": "videos-extra.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/videos-extras/:id",
+      "handler": "videos-extra.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/videos-extras",
+      "handler": "videos-extra.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/videos-extras/:id",
+      "handler": "videos-extra.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/videos-extras/:id",
+      "handler": "videos-extra.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "videos_extras",
+  "info": {
+    "name": "VideosExtra"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "tipo": {
+      "type": "enumeration",
+      "enum": [
+        "INVERSION"
+      ]
+    },
+    "videos": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}

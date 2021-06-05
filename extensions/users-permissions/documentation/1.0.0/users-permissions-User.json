@@ -1558,6 +1558,10 @@
                 "type": "string"
               }
             }
+          },
+          "cliente": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -1649,6 +1653,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "cliente": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

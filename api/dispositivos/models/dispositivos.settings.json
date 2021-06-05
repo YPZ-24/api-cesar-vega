@@ -16,9 +16,9 @@
       "unique": true
     },
     "user": {
+      "via": "dispositivos",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "dispositivos"
+      "model": "user"
     }
   }
 }
