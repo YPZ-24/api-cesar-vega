@@ -89,6 +89,37 @@ module.exports = {
         }
     },
 
+    async canPayCitaWithSaldo(ctx){
+        /*Get data from authenticated user*/
+        const {saldo} = ctx.state.user
+        /*Get data from config asesoria*/
+        const {costo} = await strapi.services['config-asesoria'].find()
+        const can = (saldo>=costo) ? true : false
+        return {
+            statusCode: 200,
+            can,
+            total: costo,
+            message: can ? "Tienes suficiente saldo" : "No tienes suficiente saldo"
+        }
+    },
+
+    async payCitaWithSaldo(ctx){
+        /*Get data from authenticated user*/
+        const {saldo, id} = ctx.state.user
+        /*Get data from config asesoria*/
+        const {costo} = await strapi.services['config-asesoria'].find()
+        const can = (saldo>=costo) ? true : false
+        if(can){
+            await strapi.query('user', 'users-permissions').update({id},{ saldo: saldo - costo })
+            return {
+                statusCode: 200,
+                message: 'Pago exitoso'
+            }
+        }else{
+            return new GraphqlError('No tienes suficiente saldo', 400) 
+        }
+    },
+
     async payCita(ctx){
         /*Get data from authenticated user*/
         const {customerId} = ctx.state.user

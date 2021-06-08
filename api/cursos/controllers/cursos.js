@@ -3,6 +3,52 @@ const GraphqlError = require('../../../util/errorHandler')
 
 module.exports = {
 
+    async canPayCursoWithSaldo(ctx){
+        /*Get data from authenticated user*/
+        const {saldo} = ctx.state.user
+        /*Get data from params*/
+        const {id} = ctx.params
+        /*Get data from curso*/
+        const {videos} = await strapi.services.cursos.findOne({id})
+        let precioTotal = 0
+        videos.forEach(v => {
+            precioTotal += v.precio    
+        });
+        const can = (saldo>=precioTotal) ? true : false
+        console.log(ctx.state.user)
+        console.log(saldo)
+        console.log(precioTotal)
+        return {
+            statusCode: 200,
+            can,
+            total: precioTotal,
+            message: can ? "Tienes suficiente saldo" : "No tienes suficiente saldo"
+        }
+    },
+
+    async payCursoWithSaldo(ctx){
+        /*Get data from authenticated user*/
+        const {saldo, id: idUser} = ctx.state.user
+        /*Get data from params*/
+        const {id} = ctx.params
+        /*Get data from curso*/
+        const {videos} = await strapi.services.cursos.findOne({id})
+        let precioTotal = 0
+        videos.forEach(v => {
+            precioTotal += v.precio    
+        });
+        const can = (saldo>=precioTotal) ? true : false
+        if(can){
+            await strapi.query('user', 'users-permissions').update({id: idUser},{ saldo: saldo - precioTotal })
+            return {
+                statusCode: 200,
+                message: 'Pago exitoso'
+            }
+        }else{
+            return new GraphqlError('No tienes suficiente saldo', 400) 
+        }
+    },
+
     async payCurso(ctx){
         /*Get data from authenticated user*/
         const {id: idUser} = ctx.state.user

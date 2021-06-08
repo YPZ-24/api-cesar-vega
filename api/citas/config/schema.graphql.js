@@ -38,17 +38,26 @@ module.exports = {
         },
         extend type UsersPermissionsMe {
             cliente: Boolean,
-            imagenPerfil: UploadFile
+            imagenPerfil: UploadFile,
+            saldo: Float
+        },
+        type canPayWithSaldoPayload {
+            statusCode: Int,
+            can: Boolean,
+            message: String,
+            total: Float
         }
     `,
     mutation: `
         addCitaToSchedule(input: addCitaToScheduleInput): customeGenericPayload,
         payCita(input: payCitaInput): payCitaPayload,
-        sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload
+        sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload,
+        payCitaWithSaldo: customeGenericPayload
     `,
     query: `
         findFreeHourRanges(day: String!): findFreeHourRangesPayload
-        findBusyHours(timeMin: String!, timeMax: String!): findBusyHoursPayload
+        findBusyHours(timeMin: String!, timeMax: String!): findBusyHoursPayload,
+        canPayCitaWithSaldo: canPayWithSaldoPayload
     `,
     resolver: {
         Mutation: {
@@ -67,6 +76,10 @@ module.exports = {
             sendEmailWithConferenceLink:{
                 description: 'Send email with the conference link',
                 resolver: 'application::citas.citas.sendEmailWithConferenceLink'
+            },
+            payCitaWithSaldo:{
+                description: 'Pay cita with the user authenticated saldo',
+                resolver: 'application::citas.citas.payCitaWithSaldo'
             }
         },
         Query: {
@@ -86,6 +99,10 @@ module.exports = {
                     return await strapi.controllers.citas.findBusyHours(context)
                 },
             },
+            canPayCitaWithSaldo: {
+                description: 'Authenticated user can pay cita with his saldo?',
+                resolver: 'application::citas.citas.canPayCitaWithSaldo',
+            }
         },
     },
 };
