@@ -35,6 +35,10 @@ module.exports = {
         },
         input sendEmailWithConferenceLinkInput{
             where : InputID
+        },
+        extend type UsersPermissionsMe {
+            cliente: Boolean,
+            imagenPerfil: UploadFile
         }
     `,
     mutation: `

@@ -2,10 +2,35 @@ const {getBusyHours, createEvent, getFreeRanges} = require('../../../util/calend
 const {pay, createPay} = require('../../../util/stripe')
 const {sendEmail} = require('../../../util/mailer')
 const GraphqlError = require('../../../util/errorHandler')
+const axios = require('axios')
+
 
 module.exports = {
 
     async findBusyHours(ctx) {
+        const user = await strapi.admin.services.auth.checkCredentials({
+            identifier: "yepezaylin24@gmail.com",
+            password: "bela1028"
+        })
+
+        /*axios
+        .post('http://localhost:1337/auth/local', {
+            identifier: 'yepezaylin24@gmail.com',
+            password: 'bela1018',
+        })
+        .then(response => {
+            // Handle success.
+            console.log('Well done!');
+            console.log('User profile', response.data.user);
+            console.log('User token', response.data.jwt);
+        })
+        .catch(error => {
+            // Handle error.
+            console.log('An error occurred:', error.response);
+        });
+        */
+        
+        throw new Error()
         /*Get data from params*/
         const { timeMin, timeMax } = ctx.params;
         const startDatetime = new Date(timeMin)
