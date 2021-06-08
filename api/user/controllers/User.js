@@ -8,6 +8,7 @@ module.exports = {
   async getProfile(ctx){
     const {id} = ctx.params
     const user = await strapi.query('user', 'users-permissions').findOne({ id })
+    console.log(user.imagenPerfil)
     if(!user){
       return new GraphqlError("Usuario no encontrado",400) 
     }else{

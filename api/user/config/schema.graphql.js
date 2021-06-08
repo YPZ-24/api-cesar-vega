@@ -18,7 +18,7 @@ module.exports = {
             fechaNacimiento: Date!,
             telefono: String!,
             saldo: Int!,
-            imagenPerfil: String
+            imagenPerfil: UploadFile
         },
     `,
     mutation: `
