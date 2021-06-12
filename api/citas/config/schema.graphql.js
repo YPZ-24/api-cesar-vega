@@ -39,7 +39,8 @@ module.exports = {
         extend type UsersPermissionsMe {
             cliente: Boolean,
             imagenPerfil: UploadFile,
-            saldo: Float
+            saldo: Float,
+            customerId: String
         },
         type canPayWithSaldoPayload {
             statusCode: Int,
