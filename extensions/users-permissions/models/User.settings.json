@@ -46,8 +46,8 @@
     },
     "confirmed": {
       "type": "boolean",
-      "default": true,
-      "configurable": false
+      "default": false,
+      "configurable": true
     },
     "role": {
       "model": "role",

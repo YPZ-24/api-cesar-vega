@@ -19,11 +19,12 @@ module.exports = {
             telefono: String!,
             saldo: Int!,
             imagenPerfil: UploadFile
-        },
+        }
     `,
     mutation: `
         createCustomerId: customeGenericPayload,
-        createUserRefered(input: createUserInput): createUserPayload
+        createUserRefered(input: createUserInput): createUserPayload,
+        createUserGeneric(input: createUserInput): createUserPayload,
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -38,6 +39,10 @@ module.exports = {
             createUserRefered: {
                 description: 'Create user as a refered user',
                 resolver: 'application::user.user.createUserRefered',
+            },
+            createUserGeneric: {
+                description: 'Create a generic user',
+                resolver: 'application::user.user.createUserGeneric',
             }
         },
         Query: {

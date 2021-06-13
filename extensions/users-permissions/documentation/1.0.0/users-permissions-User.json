@@ -1207,7 +1207,7 @@
           },
           "confirmed": {
             "type": "boolean",
-            "default": true
+            "default": false
           },
           "role": {
             "required": [
@@ -1595,7 +1595,7 @@
           },
           "confirmed": {
             "type": "boolean",
-            "default": true
+            "default": false
           },
           "role": {
             "type": "string"

@@ -15,9 +15,6 @@ module.exports = {
             precioTotal += v.precio    
         });
         const can = (saldo>=precioTotal) ? true : false
-        console.log(ctx.state.user)
-        console.log(saldo)
-        console.log(precioTotal)
         return {
             statusCode: 200,
             can,

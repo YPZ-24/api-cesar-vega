@@ -26,9 +26,13 @@ module.exports = {
   },
 
   async createUserRefered(ctx){
-    const user = ctx.request.body;
-    const newUser = await strapi.query('user', 'users-permissions').create({...user, blocked: true, cliente: true})
-    return {user: newUser}
+    await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
+    const user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
+    return user;
+  },
+
+  async createUserGeneric(ctx){
+    return await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
   },
 
   async getPaymentMethods(ctx){
