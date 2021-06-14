@@ -18,7 +18,6 @@ async function getGoogleCalendar(){
     }
 }
 
-
 async function getBusyHours({startDatetime, endDatetime}){
     try{
         const calendar = await getGoogleCalendar();
@@ -37,8 +36,6 @@ async function getBusyHours({startDatetime, endDatetime}){
         throw new Error(error)
     }
 }
-
-//getFreeRanges({startDatetime: new Date('2021-05-27'), endDatetime: new Date('2021-05-28')})
 
 async function getFreeRanges({startDatetime, endDatetime, duration}){
     try{

@@ -516,7 +516,8 @@
     "schemas": {
       "Videos": {
         "required": [
-          "id"
+          "id",
+          "videoLink"
         ],
         "properties": {
           "id": {
@@ -751,6 +752,9 @@
               }
             }
           },
+          "videoLink": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -758,6 +762,9 @@
         }
       },
       "NewVideos": {
+        "required": [
+          "videoLink"
+        ],
         "properties": {
           "titulo": {
             "type": "string"
@@ -776,6 +783,9 @@
             "items": {
               "type": "string"
             }
+          },
+          "videoLink": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

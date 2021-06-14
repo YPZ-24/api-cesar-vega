@@ -46,6 +46,10 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "videoLink": {
+      "type": "string",
+      "required": true
     }
   }
 }

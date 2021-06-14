@@ -722,7 +722,8 @@
           },
           "video": {
             "required": [
-              "id"
+              "id",
+              "videoLink"
             ],
             "properties": {
               "id": {
@@ -750,6 +751,9 @@
                 }
               },
               "portada": {
+                "type": "string"
+              },
+              "videoLink": {
                 "type": "string"
               },
               "published_at": {
