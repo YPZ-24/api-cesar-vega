@@ -797,7 +797,9 @@
     "schemas": {
       "Citas": {
         "required": [
-          "id"
+          "id",
+          "fecha",
+          "asunto"
         ],
         "properties": {
           "id": {
@@ -928,6 +930,10 @@
         }
       },
       "NewCitas": {
+        "required": [
+          "fecha",
+          "asunto"
+        ],
         "properties": {
           "fecha": {
             "type": "string",

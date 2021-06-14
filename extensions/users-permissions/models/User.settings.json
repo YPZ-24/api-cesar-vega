@@ -81,8 +81,8 @@
       "via": "usuarioReferido"
     },
     "citas": {
-      "collection": "citas",
-      "via": "usuario"
+      "via": "usuario",
+      "collection": "citas"
     },
     "videos_usuarios": {
       "collection": "videos-usuario",

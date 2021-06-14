@@ -5,6 +5,25 @@ const GraphqlError = require('../../../util/errorHandler')
 
 module.exports = {
 
+    async create(ctx){
+        /*Get data from params*/
+        const cita = ctx.request.body;
+        const {duracion} = await strapi.services['config-asesoria'].find()
+
+        /*Define when cita ends*/
+        const eDatetime = new Date(cita.fecha)
+        const sDatetime = new Date(cita.fecha)
+        eDatetime.setMinutes(sDatetime.getMinutes() + duracion)
+        const busyHours = await getBusyHours({startDatetime: sDatetime, endDatetime: eDatetime})
+        if(busyHours.length != 0){
+            return new GraphqlError('Este horario ya esta ocupado', 503) 
+        }
+        const citaCreated = await strapi.services.citas.create(cita)
+        return {
+            cita: citaCreated
+        }
+    },
+
     async findBusyHours(ctx) {
         /*Get data from params*/
         const { timeMin, timeMax } = ctx.params;

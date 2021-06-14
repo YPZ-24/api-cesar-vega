@@ -12,15 +12,17 @@
   },
   "attributes": {
     "fecha": {
-      "type": "datetime"
+      "type": "datetime",
+      "required": true
     },
     "asunto": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "usuario": {
-      "via": "citas",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "citas"
     },
     "status": {
       "type": "enumeration",
