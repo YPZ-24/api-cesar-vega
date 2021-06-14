@@ -8,8 +8,9 @@ module.exports = {
         const {saldo} = ctx.state.user
         /*Get data from params*/
         const {id} = ctx.params
-        /*Get data from curso*/
-        const {videos} = await strapi.services.cursos.findOne({id})
+        const course = await strapi.services.cursos.findOne({id})
+        if(!course) return new GraphqlError("El curso no existe", 400)
+        const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
             precioTotal += v.precio    
@@ -29,7 +30,9 @@ module.exports = {
         /*Get data from params*/
         const {id} = ctx.params
         /*Get data from curso*/
-        const {videos} = await strapi.services.cursos.findOne({id})
+        const course = await strapi.services.cursos.findOne({id})
+        if(!course) return new GraphqlError("El curso no existe", 400)
+        const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
             precioTotal += v.precio    
@@ -53,7 +56,9 @@ module.exports = {
         /*Get data from params*/
         const {id, idPaymentMethod} = ctx.params
         /*Get data from curso*/
-        const {videos} = await strapi.services.cursos.findOne({id})
+        const course = await strapi.services.cursos.findOne({id})
+        if(!course) return new GraphqlError("El curso no existe", 400)
+        const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
             precioTotal += v.precio    

@@ -19,12 +19,19 @@ module.exports = {
             telefono: String!,
             saldo: Int!,
             imagenPerfil: UploadFile
+        },
+        input addUserWhere{
+            idCurso: ID!
+        },
+        input addUserInput{
+            where: addUserWhere!
         }
     `,
     mutation: `
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
+        addCurso(input: addUserInput): customeGenericPayload
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -43,6 +50,14 @@ module.exports = {
             createUserGeneric: {
                 description: 'Create a generic user',
                 resolver: 'application::user.user.createUserGeneric',
+            },
+            addCurso: {
+                description: 'Add curso to authenticated user',
+                resolverOf: 'application::user.user.addCurso',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.addCurso(context)
+                },
             }
         },
         Query: {

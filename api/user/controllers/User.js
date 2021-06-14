@@ -70,4 +70,19 @@ module.exports = {
       }
   },
 
+  async addCurso(ctx){
+    /*Get data from authenticated user*/
+    const {id, cursos} = ctx.state.user;
+    const {idCurso} = ctx.params;
+    //Validations
+    const curso = await strapi.services.cursos.findOne({id: idCurso})
+    if(!curso) return new GraphqlError("El curso no existe", 400) 
+
+    await strapi.query('user', 'users-permissions').update({ id }, {cursos: [...cursos, idCurso]})
+    return{
+      statusCode: 200,
+      message: "Ahora eres dueño de este curso"
+    }
+  }
+
 };
