@@ -72,11 +72,14 @@ module.exports = {
 
   async addCurso(ctx){
     /*Get data from authenticated user*/
-    const {id, cursos} = ctx.state.user;
+    const {id, cursos, cursos: userCourses} = ctx.state.user;
     const {idCurso} = ctx.params;
     //Validations
-    const curso = await strapi.services.cursos.findOne({id: idCurso})
-    if(!curso) return new GraphqlError("El curso no existe", 400) 
+    const course = await strapi.services.cursos.findOne({id: idCurso})
+    if(!course) return new GraphqlError("El curso no existe", 400)
+    let exists = false;
+    userCourses.forEach( (uc) => (uc.toString()===idCurso) ? exists = true : exists )
+    if(exists) return new GraphqlError("El curso ya es tuyo", 400)
 
     await strapi.query('user', 'users-permissions').update({ id }, {cursos: [...cursos, idCurso]})
     return{

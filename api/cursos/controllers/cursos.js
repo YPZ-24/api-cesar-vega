@@ -8,8 +8,10 @@ module.exports = {
         const {saldo} = ctx.state.user
         /*Get data from params*/
         const {id} = ctx.params
+        //Validations
         const course = await strapi.services.cursos.findOne({id})
         if(!course) return new GraphqlError("El curso no existe", 400)
+        
         const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
@@ -26,12 +28,16 @@ module.exports = {
 
     async payCursoWithSaldo(ctx){
         /*Get data from authenticated user*/
-        const {saldo, id: idUser} = ctx.state.user
+        const {saldo, id: idUser, cursos: userCourses} = ctx.state.user
         /*Get data from params*/
         const {id} = ctx.params
-        /*Get data from curso*/
+        //Validations
         const course = await strapi.services.cursos.findOne({id})
         if(!course) return new GraphqlError("El curso no existe", 400)
+        let exists = false;
+        userCourses.forEach( (uc) => (uc.toString()===id) ? exists = true : exists )
+        if(exists) return new GraphqlError("El curso ya es tuyo", 400)
+
         const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
@@ -51,13 +57,17 @@ module.exports = {
 
     async payCurso(ctx){
         /*Get data from authenticated user*/
-        const {id: idUser} = ctx.state.user
-        const {customerId} = await strapi.query('user', 'users-permissions').findOne({ id: idUser })
+        const {id: idUser, customerId, cursos: userCourses} = ctx.state.user
         /*Get data from params*/
-        const {id, idPaymentMethod} = ctx.params
-        /*Get data from curso*/
+        let {id, idPaymentMethod} = ctx.params
+        //Validations
         const course = await strapi.services.cursos.findOne({id})
         if(!course) return new GraphqlError("El curso no existe", 400)
+        let exists = false;
+        userCourses.forEach( (uc) => (uc.toString()===id) ? exists = true : exists )
+        if(exists) return new GraphqlError("El curso ya es tuyo", 400)
+        if(!customerId) return new GraphqlError("No tienes clave para pagar", 500)
+        
         const {videos} = course;
         let precioTotal = 0
         videos.forEach(v => {
@@ -87,7 +97,5 @@ module.exports = {
             return new GraphqlError("Error al realizar pago", 500) 
         }
     }
-
-
 
 };
