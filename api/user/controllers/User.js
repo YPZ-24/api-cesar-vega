@@ -1,7 +1,5 @@
 const {getCustomerCards, generateCustomerId} = require('../../../util/stripe')
 const GraphqlError = require('../../../util/errorHandler');
-const { logging } = require('googleapis/build/src/apis/logging');
-
 
 module.exports = {
 
