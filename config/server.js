@@ -6,9 +6,9 @@ module.exports = ({ env }) => ({
       secret: env('ADMIN_JWT_SECRET'),
     },
   },*/
-  url: 'http://cesarvega.com.mx/api',
+  url: 'https://cesarvega.com.mx/api',
   admin: {
-    url: 'http://cesarvega.com.mx/dashboard',
+    url: 'https://cesarvega.com.mx/dashboard',
     auth: {
       secret: env('ADMIN_JWT_SECRET'),
     },
