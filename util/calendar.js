@@ -8,7 +8,7 @@ async function getGoogleCalendar(){
         email: privatekey.client_email,
         key: privatekey.private_key,
         scopes:['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/calendar.events'],
-        //subject: EMAIL_G_SUITE
+        subject: EMAIL_G_SUITE
     })
     try{
         const r = await jwtClient.authorize()
@@ -111,7 +111,6 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
         end: {
             dateTime: endDatetime
         },
-        /*
         conferenceData:{
             createRequest:{
                 requestId: "cesarVegaKey",
@@ -125,7 +124,7 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
             {
                 email: attendeeEmail
             },
-        ]*/
+        ]
     };
     const calendar = await getGoogleCalendar();
     
@@ -134,7 +133,6 @@ async function createEvent({title, description, startDatetime, endDatetime, atte
         conferenceDataVersion: 1,
         resource: event
     })
-    a.data.hangoutLink = 'https://meet.google.com/rnt-gpgs-pbu'
     return a;
 }
 
