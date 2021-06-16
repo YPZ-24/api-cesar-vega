@@ -2,6 +2,7 @@ const {getBusyHours, createEvent, getFreeRanges} = require('../../../util/calend
 const {pay, createPay} = require('../../../util/stripe')
 const {sendEmail} = require('../../../util/mailer')
 const GraphqlError = require('../../../util/errorHandler')
+const { gmail } = require('googleapis/build/src/apis/gmail')
 
 module.exports = {
 
@@ -175,12 +176,18 @@ module.exports = {
         /*Get data from params*/
         const {id} = ctx.params
         /*Get data from citas*/
-        const {enlace, usuario, asunto} = await strapi.services.citas.findOne({ id });
+        const {enlace, usuario, asunto, fecha} = await strapi.services.citas.findOne({ id });
         /*Sending email with cita conference link*/
         try{
-            
+            //const msj = `${asunto}, Link para sesión: ${enlace}`
+            const fechaFormatted = fecha.toLocaleString('es-MX')
+            const msj =     `<p>Gracias por agendar una cita!</p>
+                            Asunto: ${asunto}<br/>
+                            Fecha: ${fechaFormatted}<br/>
+                            Enlace: ${enlace}<br/>
+                            `            
             await sendEmail( {
-                message: `${asunto}, Link para sesión: ${enlace}`, 
+                message: msj, 
                 receiver: usuario.email, 
                 subject: "Cesar Vega | Asesoría" 
             })
