@@ -53,7 +53,8 @@ module.exports = {
         addCitaToSchedule(input: addCitaToScheduleInput): customeGenericPayload,
         payCita(input: payCitaInput): payCitaPayload,
         sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload,
-        payCitaWithSaldo: customeGenericPayload
+        payCitaWithSaldo: customeGenericPayload,
+        createCitaC(input: createCitaInput): Citas
     `,
     query: `
         findFreeHourRanges(day: String!): findFreeHourRangesPayload
@@ -62,6 +63,14 @@ module.exports = {
     `,
     resolver: {
         Mutation: {
+            createCitaC: {
+                description: 'Create cita',
+                resolverOf: 'application::citas.citas.create',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.citas.create(context)
+                },
+            },
             addCitaToSchedule: {
                 description: 'Add cita to schedule',
                 resolver: 'application::citas.citas.addCitaToSchedule',

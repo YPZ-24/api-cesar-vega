@@ -19,9 +19,7 @@ module.exports = {
             return new GraphqlError('Este horario ya esta ocupado', 503) 
         }
         const citaCreated = await strapi.services.citas.create(cita)
-        return {
-            cita: citaCreated
-        }
+        return citaCreated
     },
 
     async findBusyHours(ctx) {
@@ -44,7 +42,7 @@ module.exports = {
             return new GraphqlError('Error al conectar con Calendar', 503) 
         }
     },
-
+    
     async findFreeHourRanges(ctx) {
         /*Get data from params*/
         const { day } = ctx.params;
