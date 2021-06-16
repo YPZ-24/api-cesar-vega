@@ -47,6 +47,9 @@ module.exports = {
             can: Boolean,
             message: String,
             total: Float
+        },
+        type createCitaCPayload {
+            cita: Citas
         }
     `,
     mutation: `
@@ -54,7 +57,7 @@ module.exports = {
         payCita(input: payCitaInput): payCitaPayload,
         sendEmailWithConferenceLink(input: sendEmailWithConferenceLinkInput): customeGenericPayload,
         payCitaWithSaldo: customeGenericPayload,
-        createCitaC(input: createCitaInput): Citas
+        createCitaC(input: createCitaInput): createCitaCPayload
     `,
     query: `
         findFreeHourRanges(day: String!): findFreeHourRangesPayload
