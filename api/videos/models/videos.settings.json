@@ -18,15 +18,6 @@
     "descripcion": {
       "type": "text"
     },
-    "video": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
-    },
     "curso": {
       "model": "cursos",
       "via": "videos"

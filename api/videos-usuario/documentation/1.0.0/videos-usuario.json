@@ -735,9 +735,6 @@
               "descripcion": {
                 "type": "string"
               },
-              "video": {
-                "type": "string"
-              },
               "curso": {
                 "type": "string"
               },
