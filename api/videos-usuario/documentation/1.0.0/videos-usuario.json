@@ -649,11 +649,11 @@
               "confirmationToken": {
                 "type": "string"
               },
-              "confirmed": {
-                "type": "boolean"
-              },
               "role": {
                 "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
               },
               "blocked": {
                 "type": "boolean"
@@ -710,6 +710,9 @@
                 "type": "string"
               },
               "cliente": {
+                "type": "boolean"
+              },
+              "emailConfirmed": {
                 "type": "boolean"
               },
               "created_by": {

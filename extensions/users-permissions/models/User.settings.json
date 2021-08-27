@@ -44,16 +44,15 @@
       "configurable": false,
       "private": true
     },
-    "confirmed": {
-      "type": "boolean",
-      "default": false,
-      "configurable": true
-    },
     "role": {
       "model": "role",
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false
     },
     "blocked": {
       "type": "boolean",
@@ -81,8 +80,8 @@
       "via": "usuarioReferido"
     },
     "citas": {
-      "via": "usuario",
-      "collection": "citas"
+      "collection": "citas",
+      "via": "usuario"
     },
     "videos_usuarios": {
       "collection": "videos-usuario",
@@ -110,6 +109,10 @@
       "required": false
     },
     "cliente": {
+      "type": "boolean",
+      "default": false
+    },
+    "emailConfirmed": {
       "type": "boolean",
       "default": false
     }

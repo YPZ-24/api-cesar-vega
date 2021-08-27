@@ -1205,10 +1205,6 @@
           "provider": {
             "type": "string"
           },
-          "confirmed": {
-            "type": "boolean",
-            "default": false
-          },
           "role": {
             "required": [
               "id",
@@ -1246,6 +1242,10 @@
                 "type": "string"
               }
             }
+          },
+          "confirmed": {
+            "type": "boolean",
+            "default": false
           },
           "blocked": {
             "type": "boolean",
@@ -1564,6 +1564,10 @@
           "cliente": {
             "type": "boolean",
             "default": false
+          },
+          "emailConfirmed": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -1595,12 +1599,12 @@
           "confirmationToken": {
             "type": "string"
           },
+          "role": {
+            "type": "string"
+          },
           "confirmed": {
             "type": "boolean",
             "default": false
-          },
-          "role": {
-            "type": "string"
           },
           "blocked": {
             "type": "boolean",
@@ -1657,6 +1661,10 @@
             }
           },
           "cliente": {
+            "type": "boolean",
+            "default": false
+          },
+          "emailConfirmed": {
             "type": "boolean",
             "default": false
           },

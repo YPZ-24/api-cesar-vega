@@ -40,7 +40,8 @@ module.exports = {
             cliente: Boolean,
             imagenPerfil: UploadFile,
             saldo: Float,
-            customerId: String
+            customerId: String,
+            emailConfirmed: Boolean
         },
         type canPayWithSaldoPayload {
             statusCode: Int,
