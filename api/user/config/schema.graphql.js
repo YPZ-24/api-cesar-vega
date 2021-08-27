@@ -18,7 +18,8 @@ module.exports = {
             fechaNacimiento: Date!,
             telefono: String!,
             saldo: Int!,
-            imagenPerfil: UploadFile
+            imagenPerfil: UploadFile,
+            emailConfirmed: Boolean
         },
         input addUserWhere{
             idCurso: ID!
@@ -31,7 +32,8 @@ module.exports = {
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
-        addCurso(input: addUserInput): customeGenericPayload
+        addCurso(input: addUserInput): customeGenericPayload,
+        sendEmailConfirmation: customeGenericPayload,
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -39,6 +41,10 @@ module.exports = {
     `,
     resolver: {
         Mutation: {
+            sendEmailConfirmation: {
+                description: 'Send an email to confirm email',
+                resolver: 'application::user.user.sendEmailConfirmation'
+            },
             createCustomerId: {
                 description: 'Create a Stripe customer Id for the authenticated user',
                 resolver: 'application::user.user.createCustomerId',

@@ -1,5 +1,6 @@
 const {getCustomerCards, generateCustomerId} = require('../../../util/stripe')
 const GraphqlError = require('../../../util/errorHandler');
+const { sendEmail } = require('../../../util/mailer');
 
 module.exports = {
 
@@ -85,6 +86,47 @@ module.exports = {
     return{
       statusCode: 200,
       message: "Ahora eres dueño de este curso"
+    }
+  },
+
+  async sendEmailConfirmation(ctx){
+    const {id:idUser, email} = ctx.state.user
+    const urlConfirmation = `https://cesarvega.com.mx/user/${idUser}/email/confirm`
+    const msj =     `<p>Hola...!</p>
+                      Confirma tu correo entrando al siguiente enlace: 
+                      ${urlConfirmation}
+                    `         
+    try{
+
+      await sendEmail( {
+        message: msj, 
+        receiver: email, 
+        subject: "Cesar Vega | Asesoría" 
+      })
+
+      return{
+        statusCode: 200,
+        message: "Revisa tu correo electronico"
+      }
+
+    }catch(e){
+      console.log(e)
+      return new GraphqlError('Ocurrio un error al enviar correo', 500) 
+    }  
+
+  },
+
+  async confirmEmail(ctx){
+    const userId = ctx.params.id
+    let response;
+    try{
+      await strapi.query('user', 'users-permissions').update({ id: userId }, {emailConfirmed: true, confirmed: true})
+      response = "Tu correo electronico fue confirmado"
+    }catch(e){
+      console.log(e)
+      response = "Algo paso, vuelve a intentarlo"
+    }finally{
+      return response
     }
   }
 

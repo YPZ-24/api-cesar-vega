@@ -15,6 +15,14 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/user/:id/email/confirm",
+      "handler": "User.confirmEmail",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
