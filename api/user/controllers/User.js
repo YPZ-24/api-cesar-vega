@@ -7,11 +7,10 @@ module.exports = {
   async getProfile(ctx){
     const {id} = ctx.params
     const user = await strapi.query('user', 'users-permissions').findOne({ id })
-    console.log(user.imagenPerfil)
     if(!user){
       return new GraphqlError("Usuario no encontrado",400) 
     }else{
-      const {username, email, edad, fechaNacimiento, telefono, saldo, imagenPerfil} = user
+      const {username, email, edad, fechaNacimiento, telefono, saldo, imagenPerfil, emailConfirmed} = user
       return {
         username,
         email,
@@ -20,6 +19,7 @@ module.exports = {
         telefono,
         saldo,
         imagenPerfil,
+        emailConfirmed
       }
     }
   },
