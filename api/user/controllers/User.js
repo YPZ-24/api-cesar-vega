@@ -25,13 +25,56 @@ module.exports = {
   },
 
   async createUserRefered(ctx){
-    await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
-    const user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
-    return user;
+    try{
+      const {email, username} = ctx.request.body
+
+      let user = await strapi.query('user', 'users-permissions').findOne(  {
+        _where: { 
+          _or: [ 
+            {email},
+            {username}
+          ] 
+        } 
+      } )
+      
+      if(user){
+        if(user.email === email) return new GraphqlError("Ya hay un usuario con ese correo",400) 
+        if(user && user.username === username) return new GraphqlError("Ya hay un usuario con ese nombre de usuario",400) 
+      }
+
+      await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
+      user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
+      return user;
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Ocurrio un error",500) 
+    }
+    
   },
 
   async createUserGeneric(ctx){
-    return await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
+    try{
+      const {email, username} = ctx.request.body
+
+      const user = await strapi.query('user', 'users-permissions').findOne(  {
+        _where: { 
+          _or: [ 
+            {email},
+            {username}
+          ] 
+        } 
+      } )
+
+      if(user){
+        if(user.email === email) return new GraphqlError("Ya hay un usuario con ese correo",400) 
+        if(user && user.username === username) return new GraphqlError("Ya hay un usuario con ese nombre de usuario",400) 
+      }
+      
+      return await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Ocurrio un error",500) 
+    }
   },
 
   async getPaymentMethods(ctx){
