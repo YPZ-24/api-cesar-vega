@@ -26,6 +26,11 @@ module.exports = {
         },
         input addUserInput{
             where: addUserWhere!
+        },
+        type userExistsWithEmailPayload{
+            statusCode: Int,
+            message: String
+            exists: Boolean
         }
     `,
     mutation: `
@@ -33,11 +38,12 @@ module.exports = {
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
         addCurso(input: addUserInput): customeGenericPayload,
-        sendEmailConfirmation: customeGenericPayload,
+        sendEmailConfirmation: customeGenericPayload
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
-        getProfile(id: ID!): getProfilePayload
+        getProfile(id: ID!): getProfilePayload,
+        userExistsWithEmail(email: String!): userExistsWithEmailPayload
     `,
     resolver: {
         Mutation: {
@@ -74,6 +80,14 @@ module.exports = {
             getProfile: {
                 description: 'Get data to user profile',
                 resolver: 'application::user.user.getProfile',
+            },
+            userExistsWithEmail: {
+                description: 'Returns if and user with specific email exists',
+                resolverOf: 'application::user.user.userExistsWithEmail',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.userExistsWithEmail(context)
+                },
             }
         },
     },
