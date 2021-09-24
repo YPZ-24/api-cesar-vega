@@ -758,9 +758,6 @@
                 "blocked": {
                   "type": "boolean"
                 },
-                "edad": {
-                  "type": "integer"
-                },
                 "fechaNacimiento": {
                   "type": "string"
                 },

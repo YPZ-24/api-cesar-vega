@@ -12,12 +12,11 @@ module.exports = {
             cards: [Card]
         },
         type getProfilePayload{
-            username: String!,
-            email: String!,
-            edad: Int!,
-            fechaNacimiento: Date!,
-            telefono: String!,
-            saldo: Int!,
+            username: String,
+            email: String,
+            fechaNacimiento: Date,
+            telefono: String,
+            saldo: Int,
             imagenPerfil: UploadFile,
             emailConfirmed: Boolean
         },

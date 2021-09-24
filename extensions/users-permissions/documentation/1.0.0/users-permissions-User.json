@@ -1251,9 +1251,6 @@
             "type": "boolean",
             "default": false
           },
-          "edad": {
-            "type": "integer"
-          },
           "fechaNacimiento": {
             "type": "string",
             "format": "date"
@@ -1609,9 +1606,6 @@
           "blocked": {
             "type": "boolean",
             "default": false
-          },
-          "edad": {
-            "type": "integer"
           },
           "fechaNacimiento": {
             "type": "string",
