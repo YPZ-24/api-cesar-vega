@@ -30,9 +30,20 @@ module.exports = {
             statusCode: Int,
             message: String
             exists: Boolean
+        },
+        input tokenInput{
+            jwt: String
+        },
+        input refreshTokenInput{
+            where: tokenInput
+        },
+        type refreshTokenPayload{
+            statusCode: Int,
+            jwt: String
         }
     `,
     mutation: `
+        refreshToken(input: refreshTokenInput): refreshTokenPayload
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
@@ -46,6 +57,14 @@ module.exports = {
     `,
     resolver: {
         Mutation: {
+            refreshToken: {
+                description: 'Refresh an existing token',
+                resolverOf: 'application::user.user.refreshToken',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.refreshToken(context)
+                },
+            },
             sendEmailConfirmation: {
                 description: 'Send an email to confirm email',
                 resolver: 'application::user.user.sendEmailConfirmation'

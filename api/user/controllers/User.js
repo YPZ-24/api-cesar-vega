@@ -79,6 +79,21 @@ module.exports = {
       return new GraphqlError("Ocurrio un error",500) 
     }
   },
+
+  async refreshToken(ctx){
+    let {jwt} = ctx.params;
+    let payloadJWT = await strapi.plugins['users-permissions'].services.jwt.verify(jwt);
+    if(new Date(payloadJWT.exp*1000) < new Date()){
+      jwt = strapi.plugins['users-permissions'].services.jwt.issue({
+        id: payloadJWT.id
+      })
+    }
+    
+    return {
+      statusCode: 201,
+      jwt
+    }
+  },
 /*
   async registerLoginWithFB(ctx){
     const {token: FbToken} = ctx.params
