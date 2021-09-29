@@ -31,10 +31,19 @@ module.exports = {
             message: String
             exists: Boolean
         },
-        input tokenInput{
+        input jwtInput{
             jwt: String
         },
         input refreshTokenInput{
+            where: jwtInput
+        },
+        input tokenInput{
+            token: String
+        },
+        input registerLoginWithGInput{
+            where: tokenInput
+        },
+        input registerLoginWithFBInput{
             where: tokenInput
         },
         type refreshTokenPayload{
@@ -44,6 +53,8 @@ module.exports = {
     `,
     mutation: `
         refreshToken(input: refreshTokenInput): refreshTokenPayload
+        registerLoginWithG(input: registerLoginWithGInput): UsersPermissionsLoginPayload
+        registerLoginWithFB(input: registerLoginWithFBInput): UsersPermissionsLoginPayload
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
@@ -63,6 +74,22 @@ module.exports = {
                 resolver: async (obj, options, { context }) => {
                     context.params = getStrapiParams(context.params)
                     return await strapi.controllers.user.refreshToken(context)
+                },
+            },
+            registerLoginWithG: {
+                description: 'login a user, if doesnt exists, register too',
+                resolverOf: 'application::user.user.registerLoginWithG',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.registerLoginWithG(context)
+                },
+            },
+            registerLoginWithFB: {
+                description: 'login a user, if doesnt exists, register too',
+                resolverOf: 'application::user.user.registerLoginWithFB',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.registerLoginWithFB(context)
                 },
             },
             sendEmailConfirmation: {

@@ -94,7 +94,7 @@ module.exports = {
       jwt
     }
   },
-/*
+
   async registerLoginWithFB(ctx){
     const {token: FbToken} = ctx.params
     try{
@@ -106,12 +106,12 @@ module.exports = {
         password: res.data.name
       }
 
-      /*Find user with email
+      /*Find user with email*/
       let user = await strapi.query('user', 'users-permissions').findOne( {
         _where: {email: fbUser.email}
       } )
       
-      /*  if user doesn't exists, register  
+      /*  if user doesn't exists, register*/  
       if(!user){
         ctx.request.body = fbUser
         await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
@@ -135,37 +135,27 @@ module.exports = {
   },
 
   async registerLoginWithG(ctx){
-    const {token: GToken} = ctx.params
+    const {token: gAuthToken} = ctx.params
     try{
-      const res = await axios.get(`https://people.googleapis.com/v1/people/me?personFields=birthdays`, {
+      const res = await axios.get(`https://people.googleapis.com/v1/people/me?personFields=birthdays,emailAddresses,names,photos`, {
         headers: {
-          'Authorization': GToken
+          'Authorization': gAuthToken
         }
       })
-      const birthday = res.data.birthdays[0].date
-      
-      /*
+      const birthday = res.data.birthdays[0].date;
       const fbUser = {
-        email: res.data.email,
-        username: res.data.name,
+        username: res.data.names[0].displayName,
+        email: res.data.emailAddresses[0].value,
         fechaNacimiento: new Date(birthday.year, (birthday.month-1), birthday.day, 0,0,0,0),
-        password: res.data.name
+        password: res.data.names[0].displayName,
       }
-      console.log( res.data.birthdays)
-      
-      console.log(birthday)
-      console.log()
-      
-      return
-      
-      
 
-      /*Find user with email
+      /*Find user with email*/
       let user = await strapi.query('user', 'users-permissions').findOne( {
         _where: {email: fbUser.email}
       } )
       
-      /*  if user doesn't exists, register  
+      /*  if user doesn't exists, register  */
       if(!user){
         ctx.request.body = fbUser
         await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
@@ -186,7 +176,7 @@ module.exports = {
       console.log(e)
       return new GraphqlError("Ocurrio un error",500) 
     }
-  },*/
+  },
 
   async getPaymentMethods(ctx){
       /*Get data from authenticated user*/
