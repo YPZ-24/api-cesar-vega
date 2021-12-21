@@ -1,0 +1,28 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/config-seguros",
+      "handler": "config-seguros.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/config-seguros",
+      "handler": "config-seguros.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/config-seguros",
+      "handler": "config-seguros.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

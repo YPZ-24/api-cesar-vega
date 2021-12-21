@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "config_seguros",
+  "info": {
+    "name": "ConfigSeguros"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "videoBannerLink": {
+      "type": "string"
+    },
+    "videoBannerDescription": {
+      "type": "text"
+    }
+  }
+}

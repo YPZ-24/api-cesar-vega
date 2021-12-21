@@ -329,6 +329,12 @@
           "maxReferidos": {
             "type": "integer"
           },
+          "videoBannerLink": {
+            "type": "string"
+          },
+          "videoBannerDescription": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -342,6 +348,12 @@
           },
           "maxReferidos": {
             "type": "integer"
+          },
+          "videoBannerLink": {
+            "type": "string"
+          },
+          "videoBannerDescription": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

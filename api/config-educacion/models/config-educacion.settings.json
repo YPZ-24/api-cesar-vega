@@ -1,0 +1,20 @@
+{
+  "kind": "singleType",
+  "collectionName": "config_educacions",
+  "info": {
+    "name": "ConfigEducacion"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "videoBannerLink": {
+      "type": "string"
+    },
+    "videoBannerDescription": {
+      "type": "text"
+    }
+  }
+}

@@ -598,6 +598,9 @@
           "subtitulo": {
             "type": "string"
           },
+          "videoLink": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -613,6 +616,9 @@
             "type": "string"
           },
           "subtitulo": {
+            "type": "string"
+          },
+          "videoLink": {
             "type": "string"
           },
           "published_at": {

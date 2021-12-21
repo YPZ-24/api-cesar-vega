@@ -16,6 +16,12 @@
     },
     "maxReferidos": {
       "type": "integer"
+    },
+    "videoBannerLink": {
+      "type": "string"
+    },
+    "videoBannerDescription": {
+      "type": "text"
     }
   }
 }

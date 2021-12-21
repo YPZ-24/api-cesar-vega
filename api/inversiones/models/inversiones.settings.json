@@ -29,6 +29,9 @@
     },
     "subtitulo": {
       "type": "string"
+    },
+    "videoLink": {
+      "type": "string"
     }
   }
 }
