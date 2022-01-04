@@ -703,6 +703,9 @@
               "emailConfirmed": {
                 "type": "boolean"
               },
+              "socialID": {
+                "type": "string"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -801,6 +804,9 @@
               },
               "emailConfirmed": {
                 "type": "boolean"
+              },
+              "socialID": {
+                "type": "string"
               },
               "created_by": {
                 "type": "string"

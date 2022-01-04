@@ -1565,6 +1565,9 @@
           "emailConfirmed": {
             "type": "boolean",
             "default": false
+          },
+          "socialID": {
+            "type": "string"
           }
         }
       },
@@ -1661,6 +1664,9 @@
           "emailConfirmed": {
             "type": "boolean",
             "default": false
+          },
+          "socialID": {
+            "type": "string"
           },
           "created_by": {
             "type": "string"

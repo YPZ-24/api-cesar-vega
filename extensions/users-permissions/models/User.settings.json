@@ -111,6 +111,9 @@
     "emailConfirmed": {
       "type": "boolean",
       "default": false
+    },
+    "socialID": {
+      "type": "string"
     }
   }
 }

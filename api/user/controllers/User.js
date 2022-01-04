@@ -134,6 +134,61 @@ module.exports = {
     }
   },
 
+  async registerLoginWithIOS(ctx){
+    const {socialID: socialID} = ctx.params
+
+    try{
+      /*Find user with social id*/
+      let user = await strapi.query('user', 'users-permissions').findOne( {
+        _where: {socialID}
+      } )
+      
+      /*  if user doesn't exists, register*/  
+      if(!user){
+        ///-----From Strapi DOCS
+        const pluginStore = await strapi.store({
+          environment: '',
+          type: 'plugin',
+          name: 'users-permissions',
+        });
+        const settings = await pluginStore.get({
+          key: 'advanced',
+        });
+        const role = await strapi
+          .query('role', 'users-permissions')
+          .findOne({ type: settings.default_role }, []);
+        //----
+
+        const iosUser = {
+          role: role.id,
+          socialID,
+          confirmed: true,
+          emailConfirmed: true
+        }
+
+        ctx.request.body = iosUser
+        //await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
+        const us = await strapi.query('user', 'users-permissions').create(iosUser);
+        console.log(us)
+        user = await strapi.query('user', 'users-permissions').findOne( {
+          _where: {socialID: iosUser.socialID}
+        } )
+      }
+      
+      const jwt = strapi.plugins['users-permissions'].services.jwt.issue({
+        id: user.id
+      })
+
+      return {
+        user,
+        jwt
+      }
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Ocurrio un error",500) 
+    }
+  },
+
   async registerLoginWithG(ctx){
     const {token: gAuthToken} = ctx.params
     try{

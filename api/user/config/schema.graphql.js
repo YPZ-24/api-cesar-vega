@@ -40,12 +40,18 @@ module.exports = {
         input tokenInput{
             token: String
         },
+        input socialIDInput{
+            socialID: String
+        },
         input registerLoginWithGInput{
             where: tokenInput
         },
         input registerLoginWithFBInput{
             where: tokenInput
         },
+        input registerLoginWithIOSInput{
+            where: socialIDInput,
+        }
         type refreshTokenPayload{
             statusCode: Int,
             jwt: String
@@ -55,6 +61,7 @@ module.exports = {
         refreshToken(input: refreshTokenInput): refreshTokenPayload
         registerLoginWithG(input: registerLoginWithGInput): UsersPermissionsLoginPayload
         registerLoginWithFB(input: registerLoginWithFBInput): UsersPermissionsLoginPayload
+        registerLoginWithIOS(input: registerLoginWithIOSInput): UsersPermissionsLoginPayload
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
@@ -90,6 +97,14 @@ module.exports = {
                 resolver: async (obj, options, { context }) => {
                     context.params = getStrapiParams(context.params)
                     return await strapi.controllers.user.registerLoginWithFB(context)
+                },
+            },
+            registerLoginWithIOS: {
+                description: 'login a user, if doesnt exists, register too',
+                resolverOf: 'application::user.user.registerLoginWithIOS',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.registerLoginWithIOS(context)
                 },
             },
             sendEmailConfirmation: {
