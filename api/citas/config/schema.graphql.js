@@ -35,14 +35,7 @@ module.exports = {
         },
         input sendEmailWithConferenceLinkInput{
             where : InputID
-        },
-        extend type UsersPermissionsMe {
-            cliente: Boolean,
-            imagenPerfil: UploadFile,
-            saldo: Float,
-            customerId: String,
-            emailConfirmed: Boolean
-        },
+        }
         type canPayWithSaldoPayload {
             statusCode: Int,
             can: Boolean,

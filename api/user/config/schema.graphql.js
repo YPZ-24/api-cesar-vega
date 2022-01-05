@@ -56,12 +56,36 @@ module.exports = {
             statusCode: Int,
             jwt: String
         }
+        extend type UsersPermissionsMe {
+            cliente: Boolean,
+            imagenPerfil: UploadFile,
+            saldo: Float,
+            customerId: String,
+            emailConfirmed: Boolean
+        },
+        type UsersPermissionsMeC {
+            id: ID!,
+            username: String,
+            email: String,
+            confirmed: Boolean,
+            blocked: Boolean,
+            role: UsersPermissionsMeRole,
+            cliente: Boolean,
+            imagenPerfil: UploadFile,
+            saldo: Float,
+            customerId: String,
+            emailConfirmed: Boolean
+        },
+        type UsersPermissionsLoginPayloadC{
+            jwt: String!,
+            user: UsersPermissionsMeC
+        }
     `,
     mutation: `
         refreshToken(input: refreshTokenInput): refreshTokenPayload
-        registerLoginWithG(input: registerLoginWithGInput): UsersPermissionsLoginPayload
-        registerLoginWithFB(input: registerLoginWithFBInput): UsersPermissionsLoginPayload
-        registerLoginWithIOS(input: registerLoginWithIOSInput): UsersPermissionsLoginPayload
+        registerLoginWithG(input: registerLoginWithGInput): UsersPermissionsLoginPayloadC
+        registerLoginWithFB(input: registerLoginWithFBInput): UsersPermissionsLoginPayloadC
+        registerLoginWithIOS(input: registerLoginWithIOSInput): UsersPermissionsLoginPayloadC
         createCustomerId: customeGenericPayload,
         createUserRefered(input: createUserInput): createUserPayload,
         createUserGeneric(input: createUserInput): createUserPayload,
