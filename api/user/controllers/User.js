@@ -2,6 +2,8 @@ const {getCustomerCards, generateCustomerId} = require('../../../util/stripe')
 const GraphqlError = require('../../../util/errorHandler');
 const { sendEmail } = require('../../../util/mailer');
 const { default: axios } = require('axios');
+const SOCIALID_KEY_FB = "FB"
+const SOCIALID_KEY_IOS = "IOS"
 
 module.exports = {
 
@@ -99,25 +101,43 @@ module.exports = {
     const {token: FbToken} = ctx.params
     try{
       const res = await axios.get(`https://graph.facebook.com/v2.12/me?fields=name,email,birthday&access_token=${FbToken}`)
-      const fbUser = {
-        email: res.data.email,
-        username: res.data.name,
-        fechaNacimiento: new Date(res.data.birthday),
-        password: res.data.name
-      }
+      if(!res.data.id) return new GraphqlError("Tu clave de acceso es incorrecta", 400) 
 
-      /*Find user with email*/
+      /*Find user with facebook id user*/
       let user = await strapi.query('user', 'users-permissions').findOne( {
-        _where: {email: fbUser.email}
+        _where: {socialID: SOCIALID_KEY_FB+res.data.id}
       } )
       
       /*  if user doesn't exists, register*/  
       if(!user){
-        ctx.request.body = fbUser
-        await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
-        user = await strapi.query('user', 'users-permissions').findOne( {
-          _where: {email: fbUser.email}
-        } )
+        ///-----From Strapi DOCS
+        const pluginStore = await strapi.store({
+          environment: '',
+          type: 'plugin',
+          name: 'users-permissions',
+        });
+        const settings = await pluginStore.get({
+          key: 'advanced',
+        });
+        const role = await strapi
+          .query('role', 'users-permissions')
+          .findOne({ type: settings.default_role }, []);
+        //----
+        // Shape user
+        const fbUser = {
+          role: role.id,
+          socialID: SOCIALID_KEY_FB+res.data.id,
+          confirmed: true,
+          emailConfirmed: true
+        }
+        if(res.data.email) fbUser.email = res.data.email
+        if(res.data.name){
+          fbUser.username = res.data.name
+          fbUser.password = res.data.name
+        } 
+        if(res.data.birthday) fbUser.fechaNacimiento = new Date(res.data.birthday)
+        //Create user
+        user = await strapi.query('user', 'users-permissions').create(fbUser);
       }
       
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue({
@@ -140,7 +160,7 @@ module.exports = {
     try{
       /*Find user with social id*/
       let user = await strapi.query('user', 'users-permissions').findOne( {
-        _where: {socialID}
+        _where: {socialID: SOCIALID_KEY_IOS + socialID}
       } )
       
       /*  if user doesn't exists, register*/  
@@ -161,18 +181,14 @@ module.exports = {
 
         const iosUser = {
           role: role.id,
-          socialID,
+          socialID: SOCIALID_KEY_IOS+socialID,
           confirmed: true,
           emailConfirmed: true
         }
 
         ctx.request.body = iosUser
         //await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
-        const us = await strapi.query('user', 'users-permissions').create(iosUser);
-        console.log(us)
-        user = await strapi.query('user', 'users-permissions').findOne( {
-          _where: {socialID: iosUser.socialID}
-        } )
+        user = await strapi.query('user', 'users-permissions').create(iosUser);
       }
       
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue({
