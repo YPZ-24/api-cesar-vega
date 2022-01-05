@@ -29,7 +29,7 @@ module.exports = {
 
   async createUserRefered(ctx){
     try{
-      const {email, username} = ctx.request.body
+      const {email} = ctx.request.body
 
       let user = await strapi.query('user', 'users-permissions').findOne(  {
         _where: {email}
@@ -67,9 +67,7 @@ module.exports = {
 
   async userExistsWithEmail(ctx){
     try{
-      console.log(ctx.params)
       const {email} = ctx.params
-      console.log(email)
       const user = await strapi.query('user', 'users-permissions').findOne({email})
       return {
         statusCode: 200,
@@ -268,6 +266,7 @@ module.exports = {
   async createCustomerId(ctx){
       /*Get data from authenticated user*/
       const {id, email} = ctx.state.user;
+      if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
       try{
         const {customerId} = await strapi.query('user', 'users-permissions').findOne({ id })
         if(customerId) return new GraphqlError("CustomId ya existe", 400)
@@ -306,6 +305,7 @@ module.exports = {
 
   async sendEmailConfirmation(ctx){
     const {id:idUser, email} = ctx.state.user
+    if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
     const urlConfirmation = `https://cesarvega.com.mx/user/${idUser}/email/confirm`
     const msj =     `<p>Hola...!</p>
                       Confirma tu correo entrando al siguiente enlace: 

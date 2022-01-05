@@ -74,6 +74,7 @@ module.exports = {
 
         /*Get data from already created cita*/
         const {usuario, fecha, asunto} = (await strapi.services.citas.findOne({ id }))
+        if(!usuario.email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
 
         /*Define when cita ends*/
         const eDatetime = new Date(fecha)
@@ -177,6 +178,7 @@ module.exports = {
         const {id} = ctx.params
         /*Get data from citas*/
         const {enlace, usuario, asunto, fecha} = await strapi.services.citas.findOne({ id });
+        if(!usuario.email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
         /*Sending email with cita conference link*/
         try{
             //const msj = `${asunto}, Link para sesión: ${enlace}`
