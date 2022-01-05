@@ -56,6 +56,9 @@ module.exports = {
     },
 
     async payCurso(ctx){
+        /*Se requiere customerId, para tenerlo, debería tener email, por lo tanto, validamos*/
+        const {email} = ctx.state.user
+        if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
         /*Get data from authenticated user*/
         const {id: idUser, customerId, cursos: userCourses} = ctx.state.user
         /*Get data from params*/

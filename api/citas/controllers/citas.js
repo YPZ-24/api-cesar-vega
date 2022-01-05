@@ -7,6 +7,9 @@ const { gmail } = require('googleapis/build/src/apis/gmail')
 module.exports = {
 
     async create(ctx){
+        /*Las rutas siguientes necesirán el email para mandar link de la reunión*/
+        const {email} = ctx.state.user
+        if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
         /*Get data from params*/
         const cita = ctx.request.body;
         const {duracion} = await strapi.services['config-asesoria'].find()
@@ -142,6 +145,9 @@ module.exports = {
     },
 
     async payCita(ctx){
+        /*Se requiere customerId, para tenerlo, debería tener email, por lo tanto, validamos*/
+        const {email} = ctx.state.user
+        if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
         /*Get data from authenticated user*/
         const {customerId} = ctx.state.user
         /*Get data from params*/
