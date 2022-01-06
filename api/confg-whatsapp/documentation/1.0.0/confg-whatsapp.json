@@ -323,7 +323,7 @@
           "id": {
             "type": "string"
           },
-          "url": {
+          "telefono": {
             "type": "string"
           },
           "published_at": {
@@ -334,7 +334,7 @@
       },
       "NewConfg-whatsapp": {
         "properties": {
-          "url": {
+          "telefono": {
             "type": "string"
           },
           "published_at": {

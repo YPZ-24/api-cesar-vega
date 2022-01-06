@@ -80,6 +80,52 @@ module.exports = {
             jwt: String!,
             user: UsersPermissionsMeC
         }
+        input createUserReferedData{
+            telefono: Long!,
+            username: String!
+        }
+        input createUserReferedInput{
+            data: createUserReferedData
+        }
+        type UsersPermissionsUserC{
+            id: ID!
+            _id: ID!,
+            createdAt: DateTime,
+            updatedAt: DateTime,
+            username: String,
+            email: String,
+            provider: String,
+            role: UsersPermissionsRole,
+            confirmed: Boolean,
+            blocked: Boolean,
+            fechaNacimiento: Date,
+            telefono: Long,
+            saldo: Float,
+            codigoReferido: Codigos,
+            customerId: String,
+            imagenPerfil: UploadFile,
+            cliente: Boolean,
+            emailConfirmed: Boolean,
+            socialID: String,
+            codigos: [Codigos],
+            citas: [Citas],
+            videos_usuarios: [VideosUsuario],
+            dispositivos: [Dispositivos],
+            cursos: [Cursos]
+        }
+        type createUserPayloadC{
+            user: UsersPermissionsUserC
+        }
+        input getReferedMessageUrlData{
+            userID: ID!,
+            referedUserID: ID!
+        }
+        input getReferedMessageUrlInput{
+            data: getReferedMessageUrlData
+        }
+        type getReferedMessageUrlPayload{
+            urlMessage: String!
+        }
     `,
     mutation: `
         refreshToken(input: refreshTokenInput): refreshTokenPayload
@@ -87,10 +133,11 @@ module.exports = {
         registerLoginWithFB(input: registerLoginWithFBInput): UsersPermissionsLoginPayloadC
         registerLoginWithIOS(input: registerLoginWithIOSInput): UsersPermissionsLoginPayloadC
         createCustomerId: customeGenericPayload,
-        createUserRefered(input: createUserInput): createUserPayload,
+        createUserRefered(input: createUserReferedInput): createUserPayloadC,
         createUserGeneric(input: createUserInput): createUserPayload,
         addCurso(input: addUserInput): customeGenericPayload,
         sendEmailConfirmation: customeGenericPayload
+        getReferedMessageUrl(input: getReferedMessageUrlInput): getReferedMessageUrlPayload
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -99,6 +146,14 @@ module.exports = {
     `,
     resolver: {
         Mutation: {
+            getReferedMessageUrl: {
+                description: 'Send message to admin with the refered user info',
+                resolverOf: 'application::user.user.getReferedMessageUrl',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.getReferedMessageUrl(context)
+                },
+            },
             refreshToken: {
                 description: 'Refresh an existing token',
                 resolverOf: 'application::user.user.refreshToken',

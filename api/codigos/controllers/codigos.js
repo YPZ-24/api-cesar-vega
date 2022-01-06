@@ -9,10 +9,10 @@ module.exports = {
         /*Get data from body*/
         const {usuarioReferido} = ctx.request.body
         try{
-            const {maxReferidos} = await strapi.services['config-referidos'].find()
+            //const {maxReferidos} = await strapi.services['config-referidos'].find()
             /*Validations*/
             const userCodes = await strapi.services.codigos.find({usuarioPropietario: id});
-            if(userCodes.length>=maxReferidos)  return new GraphqlError('Ya no puedes crear más códigos', 400)
+            //if(userCodes.length>=maxReferidos)  return new GraphqlError('Ya no puedes crear más códigos', 400)
             if(id===usuarioReferido) return new GraphqlError('No puedes referiste un código a ti mismo', 400)
             const usrReferidoFinded = await strapi.query('user', 'users-permissions').findOne({ id: usuarioReferido })
             if(!usrReferidoFinded) return new GraphqlError('No existe el usuario a referir', 400)

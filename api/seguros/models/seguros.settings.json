@@ -26,6 +26,9 @@
     },
     "descripcion": {
       "type": "text"
+    },
+    "videoLink": {
+      "type": "string"
     }
   }
 }

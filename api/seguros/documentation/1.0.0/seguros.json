@@ -595,6 +595,9 @@
           "descripcion": {
             "type": "string"
           },
+          "videoLink": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -607,6 +610,9 @@
             "type": "string"
           },
           "descripcion": {
+            "type": "string"
+          },
+          "videoLink": {
             "type": "string"
           },
           "published_at": {

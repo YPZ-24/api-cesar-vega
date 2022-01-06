@@ -8,38 +8,84 @@ const SOCIALID_KEY_IOS = "IOS"
 module.exports = {
 
   async getProfile(ctx){
-    const {id} = ctx.params
-    const user = await strapi.query('user', 'users-permissions').findOne({ id })
-    if(!user){
-      return new GraphqlError("Usuario no encontrado",400) 
-    }else{
-      const {username, email, edad, fechaNacimiento, telefono, saldo, imagenPerfil, emailConfirmed} = user
-      return {
-        username,
-        email,
-        edad,
-        fechaNacimiento,
-        telefono,
-        saldo,
-        imagenPerfil,
-        emailConfirmed
+    try{
+      const {id} = ctx.params
+      const user = await strapi.query('user', 'users-permissions').findOne({ id })
+      if(!user){
+        return new GraphqlError("Usuario no encontrado",400) 
+      }else{
+        const {username, email, edad, fechaNacimiento, telefono, saldo, imagenPerfil, emailConfirmed} = user
+        return {
+          username,
+          email,
+          edad,
+          fechaNacimiento,
+          telefono,
+          saldo,
+          imagenPerfil,
+          emailConfirmed
+        }
       }
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Lo siento, ocurrio un error", 500) 
+    }
+  },
+
+  async getReferedMessageUrl(ctx){
+    try{
+      const {userID, referedUserID} = ctx.request.body
+      const user = await strapi.query('user', 'users-permissions').findOne({id: userID});
+      const referedUser = await strapi.query('user', 'users-permissions').findOne({id: referedUserID});
+      if(!user) return new GraphqlError("El usuario no existe", 400) 
+      if(!referedUser) return new GraphqlError("El usuario referido no existe", 400) 
+      if(!referedUser.codigoReferido) return new GraphqlError("El usuario referido, no es referido", 400) 
+      const message = `Hola...!%20Soy ${user.username}%20y%20me%20gustaría%20referir%20a%20${referedUser.username}%20con%20${referedUser.telefono}%20numero%20y%20el%20código%20de%20referido%20%22${referedUser.codigoReferido.codigo}%22.`
+      const {telefono} = await strapi.services['confg-whatsapp'].find()
+      const urlMessage = `https://api.whatsapp.com/send?phone=${telefono}&text=${message}`
+
+      return {
+        urlMessage
+      }
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Lo siento, ocurrio un error", 500) 
     }
   },
 
   async createUserRefered(ctx){
     try{
-      const {email} = ctx.request.body
+      const {username, telefono} = ctx.request.body
 
-      let user = await strapi.query('user', 'users-permissions').findOne(  {
-        _where: {email}
-      } )
-      
-      if(user) return new GraphqlError("Ya hay un usuario con ese correo",400)
+      ///-----From Strapi DOCS
+      const pluginStore = await strapi.store({
+        environment: '',
+        type: 'plugin',
+        name: 'users-permissions',
+      });
+      const settings = await pluginStore.get({
+        key: 'advanced',
+      });
+      const role = await strapi
+        .query('role', 'users-permissions')
+        .findOne({ type: settings.default_role }, []);
+      //----
+      // Shape user
+      const referedUser = {
+        username: username,
+        telefono: telefono,
+        role: role.id,
+        confirmed: true,
+        emailConfirmed: true,
+        cliente: true,
+        blocked: true
+      }
 
-      await strapi.plugins['users-permissions'].controllers.auth.register(ctx);
-      user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
-      return user;
+      //Create user
+      const newUser = await strapi.query('user', 'users-permissions').create(referedUser);
+
+      //user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
+      return newUser;
     }catch(e){
       console.log(e)
       return new GraphqlError("Ocurrio un error",500) 
