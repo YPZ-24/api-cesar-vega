@@ -83,9 +83,10 @@ module.exports = {
 
       //Create user
       const newUser = await strapi.query('user', 'users-permissions').create(referedUser);
-
-      //user = await strapi.query('user', 'users-permissions').update({ email: ctx.request.body.email }, {blocked: true, cliente: true})
-      return newUser;
+      console.log(newUser);
+      return {
+        user: newUser
+      }
     }catch(e){
       console.log(e)
       return new GraphqlError("Ocurrio un error",500) 
