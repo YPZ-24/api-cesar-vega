@@ -52,7 +52,7 @@ module.exports = {
       return new GraphqlError("Lo siento, ocurrio un error", 500) 
     }
   },
-
+  //REFERIDOS
   async createUserRefered(ctx){
     try{
       const {username, telefono} = ctx.request.body
