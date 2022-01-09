@@ -126,6 +126,17 @@ module.exports = {
         type getReferedMessageUrlPayload{
             urlMessage: String!
         }
+        input getReferedMessageUrlDataC{
+            userID: ID!,
+            referedUsername: String!,
+            referedUserPhone: String!
+        }
+        input getReferedMessageUrlInputC{
+            data: getReferedMessageUrlDataC
+        }
+        type getReferedMessageUrlPayloadC{
+            urlMessage: String!
+        }
     `,
     mutation: `
         refreshToken(input: refreshTokenInput): refreshTokenPayload
@@ -137,7 +148,8 @@ module.exports = {
         createUserGeneric(input: createUserInput): createUserPayload,
         addCurso(input: addUserInput): customeGenericPayload,
         sendEmailConfirmation: customeGenericPayload
-        getReferedMessageUrl(input: getReferedMessageUrlInput): getReferedMessageUrlPayload
+        getReferedMessageUrl(input: getReferedMessageUrlInput): getReferedMessageUrlPayload,
+        getReferedMessageUrlC(input: getReferedMessageUrlInputC): getReferedMessageUrlPayloadC
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -152,6 +164,14 @@ module.exports = {
                 resolver: async (obj, options, { context }) => {
                     context.params = getStrapiParams(context.params)
                     return await strapi.controllers.user.getReferedMessageUrl(context)
+                },
+            },
+            getReferedMessageUrlC: {
+                description: 'Send message to admin with the refered user info',
+                resolverOf: 'application::user.user.getReferedMessageUrlC',
+                resolver: async (obj, options, { context }) => {
+                    context.params = getStrapiParams(context.params)
+                    return await strapi.controllers.user.getReferedMessageUrlC(context)
                 },
             },
             refreshToken: {

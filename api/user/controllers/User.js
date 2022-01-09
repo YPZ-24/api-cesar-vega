@@ -32,6 +32,24 @@ module.exports = {
     }
   },
 
+  async getReferedMessageUrlC(ctx){
+    try{
+      const {userID, referedUsername, referedUserPhone} = ctx.request.body
+      const user = await strapi.query('user', 'users-permissions').findOne({id: userID});
+      if(!user) return new GraphqlError("El usuario no existe", 400) 
+      const message = `Hola...!%20Soy ${user.username}%20y%20me%20gustaría%20referir%20a%20${referedUsername}%20con%20numero%20de%20telefono%20${referedUserPhone}.`
+      const {telefono} = await strapi.services['confg-whatsapp'].find()
+      const urlMessage = `https://api.whatsapp.com/send?phone=${telefono}&text=${message}`
+
+      return {
+        urlMessage
+      }
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Lo siento, ocurrio un error", 500) 
+    }
+  },
+
   async getReferedMessageUrl(ctx){
     try{
       const {userID, referedUserID} = ctx.request.body
