@@ -269,33 +269,49 @@ module.exports = {
   },
 
   async registerLoginWithG(ctx){
+    console.log("GO")
     const {token: gAuthToken} = ctx.params
     try{
-      const res = await axios.get(`https://people.googleapis.com/v1/people/me?personFields=birthdays,emailAddresses,names,photos`, {
+      const res = await axios.get(`https://people.googleapis.com/v1/people/me?personFields=emailAddresses,names,photos`, {
         headers: {
           'Authorization': gAuthToken
         }
       })
-      const birthday = res.data.birthdays[0].date;
-      const fbUser = {
-        username: res.data.names[0].displayName,
+      if(!res.data) return new GraphqlError("Intenta con otra forma de acceso", 400) 
+      if(!res.data.emailAddresses) return new GraphqlError("Tu cuenta no tiene un correo asociado", 4000)
+
+      const gUser = {
         email: res.data.emailAddresses[0].value,
-        fechaNacimiento: new Date(birthday.year, (birthday.month-1), birthday.day, 0,0,0,0),
-        password: res.data.names[0].displayName,
       }
 
       /*Find user with email*/
       let user = await strapi.query('user', 'users-permissions').findOne( {
-        _where: {email: fbUser.email}
+        _where: {email: gUser.email}
       } )
       
       /*  if user doesn't exists, register  */
       if(!user){
-        ctx.request.body = fbUser
-        await strapi.plugins['users-permissions'].controllers.auth.register(ctx)
-        user = await strapi.query('user', 'users-permissions').findOne( {
-          _where: {email: fbUser.email}
-        } )
+        ///-----From Strapi DOCS
+        const pluginStore = await strapi.store({
+          environment: '',
+          type: 'plugin',
+          name: 'users-permissions',
+        });
+        const settings = await pluginStore.get({
+          key: 'advanced',
+        });
+        const role = await strapi
+          .query('role', 'users-permissions')
+          .findOne({ type: settings.default_role }, []);
+        //----
+        // Shape user
+        gUser.role = role.id;
+        gUser.confirmed = true;
+        gUser.emailConfirmed = true;
+        if(res.data.names) gUser.username = res.data.names[0].displayName
+
+        //Create user
+        user = await strapi.query('user', 'users-permissions').create(gUser);
       }
       
       const jwt = strapi.plugins['users-permissions'].services.jwt.issue({
