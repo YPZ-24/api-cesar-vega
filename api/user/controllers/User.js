@@ -388,16 +388,61 @@ module.exports = {
     const {id:idUser, email} = ctx.state.user
     if(!email) return new GraphqlError('Para realizar esta acción, registra un correo electrónico', 400) 
     const urlConfirmation = `https://cesarvega.com.mx/user/${idUser}/email/confirm`
-    const msj =     `<p>Hola...!</p>
-                      Confirma tu correo entrando al siguiente enlace: 
-                      ${urlConfirmation}
-                    `         
+    const msj = `
+    <div style="
+        background-image: url(https://cesarvega.com.mx/background-app-menu.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 4px;
+        padding: 30px;
+        margin: 40px;
+    ">
+        <p style="
+            margin: 0px;
+            font-size: 25px;
+            font-weight: bolder;
+            color: white;
+        ">CONFIRMA TU CORREO</p>
+        <hr style="
+            height: 5px;
+            background-color: rgb(204, 204, 204);
+            border: none;
+            border-radius: 20px;
+            margin: 10px 0px 30px 0px;
+        ">
+        <p style="
+            margin: 10px;
+            color: white;
+            text-align: center;
+        ">Entra al siguiente enlace</p>
+        <p style="
+            margin: 0px;
+            text-align: center;
+            font-size: 18px;
+            color: white;
+        ">
+          <a style="
+              color: white;
+          " href="${urlConfirmation}">${urlConfirmation}</a>
+        </p>
+        <p style="
+                margin: 0px;
+                text-align: center;
+                margin-top: 60px;
+            ">
+            <a style="
+                color: rgb(204, 204, 204);
+            " href="https://www.cesarvegaeconomista.com/">Cesar Vega Economista</a>
+        </p>
+    </div>
+    `
+
     try{
 
       await sendEmail( {
         message: msj, 
         receiver: email, 
-        subject: "Cesar Vega | Asesoría" 
+        subject: "Cesar Vega | Confirma Correo" 
       })
 
       return{
@@ -417,7 +462,35 @@ module.exports = {
     let response;
     try{
       await strapi.query('user', 'users-permissions').update({ id: userId }, {emailConfirmed: true, confirmed: true})
-      response = "Tu correo electronico fue confirmado"
+      response = `
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+      <div style="
+          background-image: url(https://cesarvega.com.mx/background-app-menu.jpg);
+          background-size: cover;
+          background-repeat: no-repeat;
+          border-radius: 4px;
+          padding: 30px;
+          margin: 40px;
+          font-family: 'Roboto', sans-serif;
+      ">
+          <p style="
+              color: white;
+              text-align: center;
+              font-size: 3rem;
+          ">CORREO CONFIRMADO</p>
+          <p style="
+                  margin: 0px;
+                  text-align: center;
+                  margin-top: 60px;
+              ">
+              <a style="
+                  color: rgb(204, 204, 204);
+              " href="https://www.cesarvegaeconomista.com/">Cesar Vega Economista</a>
+          </p>
+      </div>
+      `
     }catch(e){
       console.log(e)
       response = "Algo paso, vuelve a intentarlo"
