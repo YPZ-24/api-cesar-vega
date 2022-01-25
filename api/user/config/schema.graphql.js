@@ -1,4 +1,5 @@
 const {getStrapiParams} = require('../../../util/graphParams')
+const _ = require('lodash');
 
 module.exports = {
     definition: `
@@ -137,6 +138,9 @@ module.exports = {
         type getReferedMessageUrlPayloadC{
             urlMessage: String!
         }
+        type updateUserPayloadC{
+            user: UsersPermissionsUserC
+        }
     `,
     mutation: `
         refreshToken(input: refreshTokenInput): refreshTokenPayload
@@ -150,6 +154,7 @@ module.exports = {
         sendEmailConfirmation: customeGenericPayload
         getReferedMessageUrl(input: getReferedMessageUrlInput): getReferedMessageUrlPayload,
         getReferedMessageUrlC(input: getReferedMessageUrlInputC): getReferedMessageUrlPayloadC
+        updateUserC(input: updateUserInput): updateUserPayloadC
     `,
     query: `
         getPaymentMethods: getPaymentMethodsPayload,
@@ -158,6 +163,15 @@ module.exports = {
     `,
     resolver: {
         Mutation: {
+            updateUserC: {
+                description: 'Update an existing user',
+                resolverOf: 'plugins::users-permissions.user.update',
+                resolver: async (obj, options, { context }) => {
+                    context.params = _.toPlainObject(options.input.where);
+                    context.request.body = _.toPlainObject(options.input.data);
+                    return await strapi.controllers.user.updateUserC(context)
+                },
+            },
             getReferedMessageUrl: {
                 description: 'Send message to admin with the refered user info',
                 resolverOf: 'application::user.user.getReferedMessageUrl',

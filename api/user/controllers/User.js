@@ -7,6 +7,33 @@ const SOCIALID_KEY_IOS = "IOS"
 
 module.exports = {
 
+  async updateUserC(ctx) {
+    const { id } = ctx.params;
+    const { email, password } = ctx.request.body;
+
+    try{
+      if(email){
+        const user = await strapi.query('user', 'users-permissions').findOne(  {
+          _where: {email}
+        } )
+        if(user) return new GraphqlError("Ya hay un usuario con ese correo",400) 
+      }
+      if(password) password = await strapi.plugins['users-permissions'].services.user.hashPassword({password})
+      
+      await strapi.plugins['users-permissions'].services.user.edit({ id }, ctx.request.body);
+  
+      const data = await strapi.query('user', 'users-permissions').findOne({id})
+  
+      return {
+        user: data
+      }
+    }catch(e){
+      console.log(e)
+      return new GraphqlError("Lo siento, ocurrio un error", 500) 
+    }
+
+  },
+
   async getProfile(ctx){
     try{
       const {id} = ctx.params
